@@ -280,13 +280,12 @@
         }
         
         #services {
-            background: transparent; /* UPDATED: Made background transparent */
-            position: relative; /* UPDATED: For positioning the background image */
+            background: transparent; 
+            position: relative; 
             z-index: 1;
             overflow: hidden;
         }
         
-        /* NEW: Background image for services section */
         .services-background-image {
             position: absolute;
             top: 0;
@@ -295,7 +294,7 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
-            opacity: 0.1; /* Adjust opacity to make it a subtle background */
+            opacity: 0.1; 
         }
 
         .section-title {
@@ -316,7 +315,7 @@
         }
 
         .service-card {
-            background: var(--background-card); /* Changed from light to card for contrast */
+            background: var(--background-card); 
             padding: 2rem;
             border-radius: 15px;
             text-align: center;
@@ -334,14 +333,19 @@
         .service-icon {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, var(--accent-cyan), #007B9E);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1rem;
-            font-size: 2rem;
-            color: white;
+        }
+        
+        /* NEW: Style for service icon images */
+        .service-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .service-title {
@@ -607,32 +611,30 @@
 
     <!-- Services Section -->
     <section class="section" id="services">
-        <!-- UPDATED: Background image added -->
         <img src="assets/images/herobannerlower1.png" alt="Digital Twin Technology Banner" class="services-background-image">
         <div class="container">
-             <!-- UPDATED: Title changed -->
             <h2 class="section-title">Our Services</h2>
             <div class="services-grid">
-                <!-- UPDATED: Card 1 Content -->
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="assets/images/icon-procurement.png" alt="Specification & Procurement Icon">
+                        <!-- UPDATED with placeholder image -->
+                        <img src="https://placehold.co/80x80/66cccc/FFFFFF?text=Icon" alt="Specification & Procurement Icon">
                     </div>
                     <h3 class="service-title">Specification & Procurement</h3>
                     <p class="service-description">Guide equipment selection for generators, chillers, and mechanical systems, ensuring REST API compatibility and smart meter integration.</p>
                 </div>
-                <!-- UPDATED: Card 2 Content -->
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="assets/images/icon-unification.png" alt="Birds-eye View Icon">
+                        <!-- UPDATED with placeholder image -->
+                        <img src="https://placehold.co/80x80/66cccc/FFFFFF?text=Icon" alt="Birds-eye View Icon">
                     </div>
                     <h3 class="service-title">Birds-eye view in your pocket</h3>
                     <p class="service-description">Pull all your data streams together into easy-to-use dashboards for insights on the go.</p>
                 </div>
-                <!-- UPDATED: Card 3 Content -->
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="assets/images/icon-bim.png" alt="BIM Data Icon">
+                        <!-- UPDATED with placeholder image -->
+                        <img src="https://placehold.co/80x80/66cccc/FFFFFF?text=Icon" alt="BIM Data Icon">
                     </div>
                     <h3 class="service-title">Already have BIM data?</h3>
                     <p class="service-description">We use your existing data streams to create your digital dollhouse: a virtual twin that co-evolves with your building.</p>

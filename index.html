@@ -248,7 +248,6 @@
             padding: 1.5rem;
             border-radius: 15px;
             border: 1px solid var(--border-light);
-            /* UPDATED: Added flex properties to center content */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -256,9 +255,8 @@
         }
 
         .how-we-do-it-icon {
-            /* UPDATED: Increased size */
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             background: var(--background-card);
             border-radius: 50%;
             display: flex;
@@ -281,16 +279,23 @@
             margin-bottom: 0.5rem;
         }
         
-        .full-width-banner {
-            padding: 0;
-        }
-        .full-width-banner img {
-            width: 100%;
-            display: block;
-        }
-
         #services {
-            background: var(--background-card);
+            background: transparent; /* UPDATED: Made background transparent */
+            position: relative; /* UPDATED: For positioning the background image */
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        /* NEW: Background image for services section */
+        .services-background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.1; /* Adjust opacity to make it a subtle background */
         }
 
         .section-title {
@@ -311,7 +316,7 @@
         }
 
         .service-card {
-            background: var(--background-light);
+            background: var(--background-card); /* Changed from light to card for contrast */
             padding: 2rem;
             border-radius: 15px;
             text-align: center;
@@ -567,7 +572,6 @@
                     <p>We connect the dots between physical and digital systems, unlocking the full value of your building.</p>
                 </div>
                 <div class="about-right-column">
-                    <!-- Quadrant 1 -->
                     <div class="how-we-do-it-card">
                         <div class="how-we-do-it-icon">
                             <img src="assets/images/icon-procurement.png" alt="Smart Procurement Icon">
@@ -575,7 +579,6 @@
                         <h4>SMART PROCUREMENT</h4>
                         <p class="service-description">Equipment specification and procurement ensures compatibility across systems.</p>
                     </div>
-                    <!-- Quadrant 2 -->
                     <div class="how-we-do-it-card">
                         <div class="how-we-do-it-icon">
                             <img src="assets/images/icon-consulting.png" alt="Readiness Consulting Icon">
@@ -583,7 +586,6 @@
                         <h4>READINESS CONSULTING</h4>
                         <p class="service-description">Preparing infrastructure for digital twin implementation.</p>
                     </div>
-                    <!-- Quadrant 3 -->
                     <div class="how-we-do-it-card">
                         <div class="how-we-do-it-icon">
                             <img src="assets/images/icon-unification.png" alt="Data Unification Icon">
@@ -591,7 +593,6 @@
                         <h4>DATA UNIFICATION</h4>
                         <p class="service-description">Transforming fragmented systems into unified dashboards.</p>
                     </div>
-                    <!-- Quadrant 4 -->
                     <div class="how-we-do-it-card">
                         <div class="how-we-do-it-icon">
                             <img src="assets/images/icon-maintenance.png" alt="Augmented Maintenance Icon">
@@ -604,30 +605,37 @@
         </div>
     </section>
 
-    <!-- Lower Hero Banner Section -->
-    <section class="section full-width-banner">
-        <img src="assets/images/herobannerlower1.png" alt="Digital Twin Technology Banner">
-    </section>
-
     <!-- Services Section -->
     <section class="section" id="services">
+        <!-- UPDATED: Background image added -->
+        <img src="assets/images/herobannerlower1.png" alt="Digital Twin Technology Banner" class="services-background-image">
         <div class="container">
-            <h2 class="section-title">Our Expertise</h2>
+             <!-- UPDATED: Title changed -->
+            <h2 class="section-title">Our Services</h2>
             <div class="services-grid">
-                <div class="service-card" onclick="showServiceDetails('dataeng')">
-                    <div class="service-icon">🔗</div>
-                    <h3 class="service-title">Data Engineering as a Service</h3>
-                    <p class="service-description">Comprehensive data infrastructure design and implementation, ensuring your digital twins are fed with accurate, real-time information streams.</p>
+                <!-- UPDATED: Card 1 Content -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img src="assets/images/icon-procurement.png" alt="Specification & Procurement Icon">
+                    </div>
+                    <h3 class="service-title">Specification & Procurement</h3>
+                    <p class="service-description">Guide equipment selection for generators, chillers, and mechanical systems, ensuring REST API compatibility and smart meter integration.</p>
                 </div>
-                <div class="service-card" onclick="showServiceDetails('consulting')">
-                    <div class="service-icon">🏗️</div>
-                    <h3 class="service-title">Digital Twin Architecture</h3>
-                    <p class="service-description">Full-spectrum consulting from initial specification to tender management, ensuring equipment compatibility with REST APIs and essential monitoring systems.</p>
+                <!-- UPDATED: Card 2 Content -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img src="assets/images/icon-unification.png" alt="Birds-eye View Icon">
+                    </div>
+                    <h3 class="service-title">Birds-eye view in your pocket</h3>
+                    <p class="service-description">Pull all your data streams together into easy-to-use dashboards for insights on the go.</p>
                 </div>
-                <div class="service-card" onclick="showServiceDetails('integration')">
-                    <div class="service-icon">🏛️</div>
-                    <h3 class="service-title">BIM Enhancement</h3>
-                    <p class="service-description">Transform existing Building Information Models into dynamic digital dollhouses with integrated HVAC, architectural, structural, fire, and data engineering layers.</p>
+                <!-- UPDATED: Card 3 Content -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img src="assets/images/icon-bim.png" alt="BIM Data Icon">
+                    </div>
+                    <h3 class="service-title">Already have BIM data?</h3>
+                    <p class="service-description">We use your existing data streams to create your digital dollhouse: a virtual twin that co-evolves with your building.</p>
                 </div>
             </div>
         </div>

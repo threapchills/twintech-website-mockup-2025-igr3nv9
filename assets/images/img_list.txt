@@ -1,0 +1,5 @@
+banners
+icons
+images
+frames
+design elements

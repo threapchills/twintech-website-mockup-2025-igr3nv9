@@ -66,6 +66,9 @@
         }
 
         .logo {
+            display: flex; /* NEW: For aligning image and text */
+            align-items: center; /* NEW: For aligning image and text */
+            gap: 0.75rem; /* NEW: Space between image and text */
             font-family: var(--font-heading);
             font-size: 1.8rem;
             font-weight: 700;
@@ -73,9 +76,14 @@
             text-decoration: none;
             letter-spacing: -0.5px;
         }
+        
+        .logo img {
+            height: 40px; /* NEW: Control the size of the logo image */
+        }
 
         .nav-links {
             display: flex;
+            align-items: center; /* NEW: Align items vertically */
             list-style: none;
             gap: 2rem;
         }
@@ -91,20 +99,20 @@
         .nav-links a:hover {
             color: var(--accent-cyan);
         }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: var(--accent-cyan);
-            transition: width 0.3s ease;
+        
+        /* NEW: Styling for the CTA button */
+        .nav-links .cta-button {
+            background-color: var(--accent-cyan);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
         }
-
-        .nav-links a:hover::after {
-            width: 100%;
+        
+        .nav-links .cta-button:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 169, 224, 0.4);
         }
 
         /* Hero Section */
@@ -350,6 +358,18 @@
             transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(0, 169, 224, 0.3);
         }
+        
+        /* NEW: Main Logo Container before footer */
+        .main-logo-container {
+            padding: 4rem 0;
+            text-align: center;
+            background: var(--background-light);
+        }
+        
+        .main-logo-container img {
+            max-width: 300px;
+            height: auto;
+        }
 
         /* Footer */
         footer {
@@ -362,14 +382,13 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-container {
-                /* Allow items to wrap on smaller screens if needed */
                 flex-wrap: wrap;
                 justify-content: center;
                 gap: 1rem;
             }
             .nav-links {
-                /* Reduce gap for smaller screens */
-                gap: 1.5rem;
+                gap: 1rem; /* Smaller gap for mobile */
+                font-size: 0.9rem; /* Smaller font for mobile nav links */
             }
             .hero-title {
                 font-size: 2.5rem;
@@ -406,12 +425,17 @@
     <nav id="navbar">
         <div class="container">
             <div class="nav-container">
-                <a href="#hero" class="logo">TwinTech</a>
+                <!-- UPDATED: Logo now contains image and text -->
+                <a href="#hero" class="logo">
+                    <img src="assets/images/logosmall.png" alt="TwinTech Small Logo">
+                    <span>TwinTech</span>
+                </a>
                 <ul class="nav-links">
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#demo">Demo</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <!-- UPDATED: Added class for CTA button styling -->
+                    <li><a href="#contact" class="cta-button">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -493,6 +517,11 @@
                 </form>
             </div>
         </div>
+    </section>
+
+    <!-- NEW: Main Logo Section -->
+    <section class="main-logo-container">
+        <img src="assets/images/twintechlogomain.png" alt="TwinTech Main Logo">
     </section>
 
     <!-- Footer -->

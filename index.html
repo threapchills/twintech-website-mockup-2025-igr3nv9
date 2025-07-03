@@ -116,10 +116,10 @@
 
         /* --- Hero Section --- */
         .hero {
-            padding-top: 120px; /* Increased padding for nav */
+            padding-top: 120px;
             min-height: 100vh;
             display: flex;
-            align-items: flex-start; /* Align content to the top */
+            align-items: flex-start;
             justify-content: center;
             position: relative;
             overflow: hidden;
@@ -132,7 +132,7 @@
             z-index: 10;
             position: relative;
             width: 100%;
-            max-width: 900px; /* Control max width of hero content */
+            max-width: 900px;
         }
         
         .hero-banner-image {
@@ -212,7 +212,7 @@
         /* --- About Section Grid Layout --- */
         .about-grid {
             display: grid;
-            grid-template-columns: 1fr 1.5fr; /* Adjust column ratio as needed */
+            grid-template-columns: 1fr 1.5fr;
             gap: 3rem;
             align-items: center;
         }
@@ -220,7 +220,7 @@
         .about-left-column h2 {
             font-family: var(--font-heading);
             font-size: 2.5rem;
-            margin-bottom: 1.5rem; /* Increased margin */
+            margin-bottom: 1.5rem;
         }
         
         .about-subheading {
@@ -264,7 +264,6 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 1rem;
-            color: white;
             padding: 5px;
         }
         
@@ -281,16 +280,30 @@
         }
         
         .full-width-banner {
-            padding: 0; 
-            line-height: 0; 
+            padding: 0;
+            line-height: 0;
         }
         .full-width-banner img {
             width: 100%;
-            display: block; 
+            display: block;
         }
 
         #services {
-            background: var(--background-card);
+            background: transparent;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .services-background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.1;
         }
 
         .section-title {
@@ -311,7 +324,7 @@
         }
 
         .service-card {
-            background: var(--background-light);
+            background: var(--background-card);
             padding: 2rem;
             border-radius: 15px;
             text-align: center;
@@ -470,7 +483,7 @@
         /* Responsive Design */
         @media (max-width: 992px) {
             .about-grid {
-                grid-template-columns: 1fr; /* Stack columns on tablet */
+                grid-template-columns: 1fr;
                 text-align: center;
             }
             .about-left-column {
@@ -498,7 +511,7 @@
 
         @media (max-width: 576px) {
             .about-right-column {
-                grid-template-columns: 1fr; /* Stack quadrants on small mobile */
+                grid-template-columns: 1fr;
             }
         }
 
@@ -525,7 +538,6 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav id="navbar">
         <div class="container">
             <div class="nav-container">
@@ -543,7 +555,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="container">
             <div class="hero-content fade-in-up">
@@ -562,7 +573,6 @@
         </div>
     </section>
     
-    <!-- About Section -->
     <section class="section" id="about">
         <div class="container">
             <div class="about-grid">
@@ -605,15 +615,14 @@
         </div>
     </section>
 
-    <!-- Lower Hero Banner Section -->
     <section class="section full-width-banner">
         <img src="assets/images/herobottom.png" alt="Digital Twin Technology Banner">
     </section>
 
-    <!-- Services Section -->
     <section class="section" id="services">
+        <img src="assets/images/herobannerlower1.png" alt="Digital Twin Technology Banner" class="services-background-image">
         <div class="container">
-            <h2 class="section-title">Our Expertise</h2>
+            <h2 class="section-title">How we guide your digital twin journey</h2>
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">
@@ -640,7 +649,6 @@
         </div>
     </section>
 
-    <!-- Demo Section -->
     <section class="section demo-section" id="demo">
         <div class="container">
             <h2 class="section-title">Experience Our Technology</h2>
@@ -649,7 +657,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
             <div class="contact-content">
@@ -674,12 +681,10 @@
         </div>
     </section>
 
-    <!-- Main Logo Section -->
     <section class="main-logo-container">
         <img src="assets/images/twintechlogomain.png" alt="TwinTech Main Logo">
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; 2025 TwinTech. Pioneering the digital twin revolution. All rights reserved.</p>

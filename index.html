@@ -34,10 +34,6 @@
             background: var(--background-light);
             overflow-x: hidden;
         }
-        
-        body.mobile-nav-open {
-            overflow: hidden;
-        }
 
         .container {
             max-width: 1200px;
@@ -76,18 +72,12 @@
             color: var(--accent-cyan);
             text-decoration: none;
             letter-spacing: -0.5px;
-            z-index: 1002; /* Ensure logo is above mobile nav overlay */
-        }
-        
-        .logo.mobile-nav-open {
-            color: var(--accent-cyan); /* Keep color when mobile nav is open */
         }
 
         .nav-links {
             display: flex;
             list-style: none;
             gap: 2rem;
-            transition: opacity 0.3s ease;
         }
 
         .nav-links a {
@@ -115,95 +105,6 @@
 
         .nav-links a:hover::after {
             width: 100%;
-        }
-        
-        /* --- Hamburger Menu --- */
-        .hamburger-menu {
-            display: none; /* Hidden by default */
-            flex-direction: column;
-            justify-content: space-around;
-            width: 2rem;
-            height: 2rem;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            z-index: 1002;
-        }
-
-        .hamburger-menu .bar {
-            width: 2rem;
-            height: 2px;
-            background: var(--text-dark);
-            border-radius: 10px;
-            transition: all 0.3s ease-in-out;
-        }
-        
-        /* Hamburger animation for mobile nav open state */
-        .hamburger-menu.open .bar:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 6px);
-            background: var(--text-dark);
-        }
-        .hamburger-menu.open .bar:nth-child(2) {
-            opacity: 0;
-        }
-        .hamburger-menu.open .bar:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -6px);
-            background: var(--text-dark);
-        }
-        
-
-        /* --- Mobile Navigation Links --- */
-        .mobile-nav-links {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            list-style: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--background-light);
-            transform: translateX(100%);
-            transition: transform 0.3s ease-in-out;
-            z-index: 1001;
-        }
-        
-        .mobile-nav-links.open {
-            transform: translateX(0);
-        }
-
-        .mobile-nav-links a {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            color: var(--text-dark);
-            text-decoration: none;
-            font-weight: 700;
-        }
-
-
-        /* --- Responsive & Dynamic Nav Logic --- */
-        
-        /* On scroll down on desktop, hide links and show hamburger */
-        nav.nav-collapsed .nav-links {
-            opacity: 0;
-            pointer-events: none;
-        }
-        nav.nav-collapsed .hamburger-menu {
-            display: flex;
-        }
-
-        /* On mobile screens */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            .hamburger-menu {
-                display: flex;
-            }
         }
 
         /* Hero Section */
@@ -458,6 +359,26 @@
             padding: 2rem 0;
         }
 
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                /* Allow items to wrap on smaller screens if needed */
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            .nav-links {
+                /* Reduce gap for smaller screens */
+                gap: 1.5rem;
+            }
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Animations */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
@@ -486,31 +407,14 @@
         <div class="container">
             <div class="nav-container">
                 <a href="#hero" class="logo">TwinTech</a>
-                
-                <!-- Desktop Navigation Links -->
                 <ul class="nav-links">
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#demo">Demo</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
-                
-                <!-- Hamburger Menu Icon -->
-                <button class="hamburger-menu" id="hamburger-toggle">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
             </div>
         </div>
-        
-        <!-- Mobile Navigation Overlay -->
-        <ul class="mobile-nav-links" id="mobile-nav">
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#demo">Demo</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
     </nav>
 
     <!-- Hero Section -->
@@ -600,33 +504,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const navbar = document.getElementById('navbar');
-            const hamburgerToggle = document.getElementById('hamburger-toggle');
-            const mobileNav = document.getElementById('mobile-nav');
-            const mobileNavLinks = mobileNav.querySelectorAll('a');
-            const logo = document.querySelector('.logo');
-
-            // --- Navigation Logic ---
-
-            // Toggle mobile nav
-            function toggleMobileNav() {
-                hamburgerToggle.classList.toggle('open');
-                mobileNav.classList.toggle('open');
-                document.body.classList.toggle('mobile-nav-open');
-                logo.classList.toggle('mobile-nav-open');
-            }
-
-            hamburgerToggle.addEventListener('click', toggleMobileNav);
-
-            // Close mobile nav when a link is clicked
-            mobileNavLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (mobileNav.classList.contains('open')) {
-                        toggleMobileNav();
-                    }
-                });
-            });
-            
             // Smooth scrolling for all anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -642,26 +519,17 @@
                 });
             });
 
-            // Navbar scroll effects
+            // Navbar scroll effect
+            const navbar = document.getElementById('navbar');
             window.addEventListener('scroll', () => {
-                // Add background and shadow on scroll
                 if (window.scrollY > 50) {
                     navbar.classList.add('scrolled');
                 } else {
                     navbar.classList.remove('scrolled');
                 }
-
-                // Collapse to hamburger on desktop scroll
-                if (window.innerWidth > 768) {
-                    if (window.scrollY > 100) {
-                        navbar.classList.add('nav-collapsed');
-                    } else {
-                        navbar.classList.remove('nav-collapsed');
-                    }
-                }
             });
 
-            // --- Section Scroll Animations ---
+            // Section Scroll Animations
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
@@ -679,7 +547,7 @@
                 observer.observe(section);
             });
 
-            // --- Placeholder Functions ---
+            // Placeholder Functions
             window.showServiceDetails = function(service) {
                 const details = {
                     dataeng: "Our Data Engineering as a Service offering provides end-to-end data pipeline architecture...",

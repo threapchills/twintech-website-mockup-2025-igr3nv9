@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TwinTech | Digital Twin Infrastructure Solutions</title>
+    <!-- NEW: Added three.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@700&display=swap');
 
@@ -492,12 +496,13 @@
         .modal-body {
             padding: 0;
             height: 85vh;
+            background: #000; /* Dark background for the 3D scene */
         }
         
-        .modal-body iframe {
+        /* UPDATED: Canvas container inside the modal */
+        #demo-canvas-container {
             width: 100%;
             height: 100%;
-            border: none;
         }
 
         @keyframes animatetop {
@@ -513,6 +518,7 @@
             font-size: 35px;
             font-weight: bold;
             transition: 0.3s;
+            z-index: 2001; /* Ensure it's above the canvas */
         }
 
         .close:hover,
@@ -747,7 +753,8 @@
       <div class="modal-content">
         <span class="close">&times;</span>
         <div class="modal-body">
-          <iframe src="https://sketchfab.com/models/20c156186642459994475871317b3336/embed" allowfullscreen></iframe>
+            <!-- UPDATED: Container for the 3D canvas -->
+            <div id="demo-canvas-container"></div>
         </div>
       </div>
     </div>
@@ -835,23 +842,93 @@
                 observer.observe(section);
             });
             
-            // --- Demo Modal Logic ---
+            // --- Demo Modal Logic & three.js ---
             const modal = document.getElementById("demoModal");
             const btn = document.getElementById("launchDemoBtn");
             const span = document.getElementsByClassName("close")[0];
+            const canvasContainer = document.getElementById('demo-canvas-container');
+
+            let scene, camera, renderer, controls, building, animationId;
+            let isDemoInitialized = false;
+
+            function initDemo() {
+                if (isDemoInitialized) return;
+
+                // Scene
+                scene = new THREE.Scene();
+
+                // Camera
+                camera = new THREE.PerspectiveCamera(75, canvasContainer.clientWidth / canvasContainer.clientHeight, 0.1, 1000);
+                camera.position.z = 5;
+
+                // Renderer
+                renderer = new THREE.WebGLRenderer({ antialias: true });
+                renderer.setSize(canvasContainer.clientWidth, canvasContainer.clientHeight);
+                renderer.setClearColor(0x000000, 1); // Black background
+                canvasContainer.appendChild(renderer.domElement);
+                
+                // Controls
+                controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.05;
+
+                // Building Model (simple stacked boxes)
+                const material = new THREE.MeshBasicMaterial({ 
+                    color: 0x66cccc, // Your accent cyan
+                    wireframe: true 
+                });
+                
+                const buildingGroup = new THREE.Group();
+                const base = new THREE.Mesh(new THREE.BoxGeometry(2, 1, 2), material);
+                const mid = new THREE.Mesh(new THREE.BoxGeometry(1.8, 1, 1.8), material);
+                mid.position.y = 1;
+                const top = new THREE.Mesh(new THREE.BoxGeometry(1.6, 1, 1.6), material);
+                top.position.y = 2;
+                
+                buildingGroup.add(base);
+                buildingGroup.add(mid);
+                buildingGroup.add(top);
+                scene.add(buildingGroup);
+                building = buildingGroup;
+
+                // Handle window resize
+                window.addEventListener('resize', onWindowResize, false);
+                
+                isDemoInitialized = true;
+            }
+            
+            function onWindowResize() {
+                if (!isDemoInitialized) return;
+                camera.aspect = canvasContainer.clientWidth / canvasContainer.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(canvasContainer.clientWidth, canvasContainer.clientHeight);
+            }
+
+            function animate() {
+                animationId = requestAnimationFrame(animate);
+                if (building) {
+                    building.rotation.y += 0.005;
+                }
+                controls.update();
+                renderer.render(scene, camera);
+            }
 
             btn.onclick = function(e) {
                 e.preventDefault();
                 modal.style.display = "block";
+                initDemo();
+                animate();
             }
 
             span.onclick = function() {
                 modal.style.display = "none";
+                cancelAnimationFrame(animationId);
             }
 
             window.onclick = function(event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
+                    cancelAnimationFrame(animationId);
                 }
             }
 

@@ -255,7 +255,6 @@
         }
 
         .how-we-do-it-icon {
-            /* UPDATED: Set size to 100px */
             width: 100px;
             height: 100px;
             background: var(--background-card);
@@ -289,21 +288,7 @@
         }
 
         #services {
-            background: transparent;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
-        
-        .services-background-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            opacity: 0.1;
+            background: var(--background-card);
         }
 
         .section-title {
@@ -324,7 +309,7 @@
         }
 
         .service-card {
-            background: var(--background-card);
+            background: var(--background-light);
             padding: 2rem;
             border-radius: 15px;
             text-align: center;
@@ -340,7 +325,6 @@
         }
 
         .service-icon {
-            /* UPDATED: Set size to 100px */
             width: 100px;
             height: 100px;
             border-radius: 50%;
@@ -479,6 +463,65 @@
             text-align: center;
             padding: 2rem 0;
         }
+        
+        /* NEW: Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: 5% auto;
+            padding: 0;
+            width: 90%;
+            max-width: 1100px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            animation-name: animatetop;
+            animation-duration: 0.4s
+        }
+        
+        .modal-body {
+            padding: 0;
+            height: 85vh; /* Responsive height */
+        }
+        
+        .modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        @keyframes animatetop {
+            from {top: -300px; opacity: 0}
+            to {top: 0; opacity: 1}
+        }
+
+        .close {
+            color: white;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 35px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
 
         /* Responsive Design */
         @media (max-width: 992px) {
@@ -538,6 +581,7 @@
     </style>
 </head>
 <body>
+    <!-- Navigation -->
     <nav id="navbar">
         <div class="container">
             <div class="nav-container">
@@ -555,6 +599,7 @@
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="container">
             <div class="hero-content fade-in-up">
@@ -573,6 +618,7 @@
         </div>
     </section>
     
+    <!-- About Section -->
     <section class="section" id="about">
         <div class="container">
             <div class="about-grid">
@@ -615,12 +661,13 @@
         </div>
     </section>
 
+    <!-- Lower Hero Banner Section -->
     <section class="section full-width-banner">
         <img src="assets/images/herobottom.png" alt="Digital Twin Technology Banner">
     </section>
 
+    <!-- Services Section -->
     <section class="section" id="services">
-        <img src="assets/images/herobannerlower1.png" alt="Digital Twin Technology Banner" class="services-background-image">
         <div class="container">
             <h2 class="section-title">How we guide your digital twin journey</h2>
             <div class="services-grid">
@@ -649,14 +696,16 @@
         </div>
     </section>
 
+    <!-- Demo Section -->
     <section class="section demo-section" id="demo">
         <div class="container">
             <h2 class="section-title">Experience Our Technology</h2>
             <p>Witness the power of digital twin technology through our interactive demonstrations showcasing real-world implementations across various industries.</p>
-            <a href="#" class="demo-button" onclick="launchDemo()">Launch Interactive Demo</a>
+            <a href="#" class="demo-button" id="launchDemoBtn">Launch Interactive Demo</a>
         </div>
     </section>
 
+    <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
             <div class="contact-content">
@@ -681,15 +730,27 @@
         </div>
     </section>
 
+    <!-- Main Logo Section -->
     <section class="main-logo-container">
         <img src="assets/images/twintechlogomain.png" alt="TwinTech Main Logo">
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; 2025 TwinTech. Pioneering the digital twin revolution. All rights reserved.</p>
         </div>
     </footer>
+    
+    <!-- NEW: Demo Modal -->
+    <div id="demoModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-body">
+          <iframe src="https://www.fab.com/listings/08e7a2a1-dcd4-43c3-b1d0-1729eb8ea863?isEmbed=true" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -773,6 +834,26 @@
             document.querySelectorAll('.section').forEach(section => {
                 observer.observe(section);
             });
+            
+            // --- Demo Modal Logic ---
+            const modal = document.getElementById("demoModal");
+            const btn = document.getElementById("launchDemoBtn");
+            const span = document.getElementsByClassName("close")[0];
+
+            btn.onclick = function(e) {
+                e.preventDefault();
+                modal.style.display = "block";
+            }
+
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
 
             // --- Placeholder Functions ---
             window.showServiceDetails = function(service) {
@@ -782,10 +863,6 @@
                     integration: "Transform your static BIM models into living, breathing digital environments..."
                 };
                 alert(details[service] || "Learn more about our comprehensive solutions.");
-            }
-
-            window.launchDemo = function() {
-                alert("Interactive demo loading...");
             }
 
             window.handleSubmit = function(event) {

@@ -185,7 +185,7 @@
             border: 1px solid var(--border-light);
             padding: 0.75rem 1.5rem;
             border-radius: 10px;
-            text-align: left;
+            text-align: center; /* UPDATED */
             font-weight: 500;
             color: var(--text-light-gray);
             cursor: pointer;
@@ -430,7 +430,7 @@
         <div class="container">
             <div class="nav-container">
                 <a href="#hero" class="logo">
-                    <img src="assets/images/ttlogo.png" alt="TwinTech Small Logo">
+                    <img src="assets/images/logosmall.png" alt="TwinTech Small Logo">
                     <span>TwinTech</span>
                 </a>
                 <ul class="nav-links">
@@ -446,7 +446,6 @@
     <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="container">
-            <!-- UPDATED HERO CONTENT -->
             <div class="hero-content fade-in-up">
                 <img src="assets/images/herobanner0.png" alt="Digital Twin Hero Banner" class="hero-banner-image">
                 <div class="search-bar-container">
@@ -546,6 +545,7 @@
             // --- Typing Animation for Search Bar ---
             const placeholder = document.getElementById('search-placeholder');
             const questions = [
+                "Which products are most frequently purchased together?", // UPDATED
                 "Show me foot traffic in the retail space...",
                 "Which AC units are due for maintenance this quarter?",
                 "Are there any energy usage anomalies?",

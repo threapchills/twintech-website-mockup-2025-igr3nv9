@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>twintech | Digital Twin Infrastructure Solutions</title>
+    <title>TwinTech | Digital Twin Infrastructure Solutions</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@700&display=swap');
 
         :root {
-            /* Updated Light Mode Color Palette */
+            /* Light Mode Color Palette */
             --background-light: #F9F9F9;
             --background-card: #FFFFFF;
             --text-dark: #1A1A1A;
@@ -34,6 +34,10 @@
             background: var(--background-light);
             overflow-x: hidden;
         }
+        
+        body.mobile-nav-open {
+            overflow: hidden;
+        }
 
         .container {
             max-width: 1200px;
@@ -41,7 +45,7 @@
             padding: 0 20px;
         }
 
-        /* Navigation */
+        /* --- Navigation --- */
         nav {
             position: fixed;
             top: 0;
@@ -72,12 +76,18 @@
             color: var(--accent-cyan);
             text-decoration: none;
             letter-spacing: -0.5px;
+            z-index: 1002; /* Ensure logo is above mobile nav overlay */
+        }
+        
+        .logo.mobile-nav-open {
+            color: var(--accent-cyan); /* Keep color when mobile nav is open */
         }
 
         .nav-links {
             display: flex;
             list-style: none;
             gap: 2rem;
+            transition: opacity 0.3s ease;
         }
 
         .nav-links a {
@@ -106,9 +116,99 @@
         .nav-links a:hover::after {
             width: 100%;
         }
+        
+        /* --- Hamburger Menu --- */
+        .hamburger-menu {
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            justify-content: space-around;
+            width: 2rem;
+            height: 2rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1002;
+        }
+
+        .hamburger-menu .bar {
+            width: 2rem;
+            height: 2px;
+            background: var(--text-dark);
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        /* Hamburger animation for mobile nav open state */
+        .hamburger-menu.open .bar:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+            background: var(--text-dark);
+        }
+        .hamburger-menu.open .bar:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-menu.open .bar:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+            background: var(--text-dark);
+        }
+        
+
+        /* --- Mobile Navigation Links --- */
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--background-light);
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 1001;
+        }
+        
+        .mobile-nav-links.open {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-links a {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+
+        /* --- Responsive & Dynamic Nav Logic --- */
+        
+        /* On scroll down on desktop, hide links and show hamburger */
+        nav.nav-collapsed .nav-links {
+            opacity: 0;
+            pointer-events: none;
+        }
+        nav.nav-collapsed .hamburger-menu {
+            display: flex;
+        }
+
+        /* On mobile screens */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hamburger-menu {
+                display: flex;
+            }
+        }
 
         /* Hero Section */
         .hero {
+            padding-top: 80px; /* Add padding to account for fixed nav */
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -160,7 +260,6 @@
             margin-right: auto;
         }
 
-        /* Video Placeholder */
         .video-placeholder {
             width: 100%;
             max-width: 800px;
@@ -190,8 +289,13 @@
         /* Section Styles */
         .section {
             padding: 5rem 0;
+            scroll-margin-top: 80px; /* Offset for smooth scroll */
         }
         
+        #about {
+            background: var(--background-light);
+        }
+
         #services {
             background: var(--background-card);
         }
@@ -254,39 +358,6 @@
             line-height: 1.6;
         }
 
-        /* Industries Section */
-        .industries {
-            background: var(--background-light);
-             border-top: 1px solid var(--border-light);
-        }
-
-        .industry-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .industry-card {
-            background: var(--background-card);
-            padding: 2rem;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            border: 1px solid var(--border-light);
-        }
-
-        .industry-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.07);
-            border-color: var(--accent-cyan);
-        }
-
-        .industry-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
-
         /* Demo Section */
         .demo-section {
             background: linear-gradient(135deg, var(--accent-cyan), #007B9E);
@@ -321,8 +392,6 @@
         .contact {
             padding: 5rem 0;
             background: var(--background-card);
-            color: var(--text-dark);
-            border-top: 1px solid var(--border-light);
         }
 
         .contact-content {
@@ -389,79 +458,16 @@
             padding: 2rem 0;
         }
 
-        /* Modal for Digital Twin History */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: #fff;
-            color: #333;
-            margin: 5% auto;
-            padding: 2rem;
-            width: 90%;
-            max-width: 800px;
-            border-radius: 15px;
-            position: relative;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        
-        .modal-content h2, .modal-content h3 {
-            color: #1a1a1a;
-        }
-
-        .close {
-            position: absolute;
-            right: 1rem;
-            top: 1rem;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #999;
-        }
-
-        .close:hover {
-            color: #333;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            .services-grid, .industry-cards {
-                grid-template-columns: 1fr;
-            }
-        }
-
         /* Animations */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .fade-in-up {
             animation: fadeInUp 0.8s ease forwards;
         }
 
-        /* Scroll animations */
         .section {
             opacity: 0;
             transform: translateY(30px);
@@ -479,16 +485,32 @@
     <nav id="navbar">
         <div class="container">
             <div class="nav-container">
-                <a href="#" class="logo">twintech</a>
+                <a href="#hero" class="logo">TwinTech</a>
+                
+                <!-- Desktop Navigation Links -->
                 <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
-                    <li><a href="#industries">Industries</a></li>
                     <li><a href="#demo">Demo</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="#" id="historyLink">Digital Twin History</a></li>
                 </ul>
+                
+                <!-- Hamburger Menu Icon -->
+                <button class="hamburger-menu" id="hamburger-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
             </div>
         </div>
+        
+        <!-- Mobile Navigation Overlay -->
+        <ul class="mobile-nav-links" id="mobile-nav">
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#demo">Demo</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </nav>
 
     <!-- Hero Section -->
@@ -500,6 +522,14 @@
                 <p class="hero-subtitle">We architect digital ecosystems that bridge the physical and virtual worlds, enabling intelligent decision-making across retail, healthcare, and infrastructure domains.</p>
                 <div class="video-placeholder" id="heroVideo"></div>
             </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title">About TwinTech</h2>
+            <p class="hero-subtitle" style="margin-bottom: 0;">TwinTech is a pioneering force in digital twin readiness. We bridge the critical gap between traditional construction and intelligent, data-driven buildings. Our mission is to embed a 'digital nervous system' into every asset, transforming static structures into dynamic, learning environments that optimize for efficiency, sustainability, and performance across their entire lifecycle.</p>
         </div>
     </section>
 
@@ -522,27 +552,6 @@
                     <div class="service-icon">🏛️</div>
                     <h3 class="service-title">BIM Enhancement</h3>
                     <p class="service-description">Transform existing Building Information Models into dynamic digital dollhouses with integrated HVAC, architectural, structural, fire, and data engineering layers.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Industries Section -->
-    <section class="section industries" id="industries">
-        <div class="container">
-            <h2 class="section-title">Industries We Serve</h2>
-            <div class="industry-cards">
-                <div class="industry-card">
-                    <h3 class="industry-title">🏪 Retail Infrastructure</h3>
-                    <p class="service-description">Optimizing consumer and infrastructure retail environments through intelligent space management, customer flow analysis, and operational efficiency enhancement.</p>
-                </div>
-                <div class="industry-card">
-                    <h3 class="industry-title">🏥 Healthcare Systems</h3>
-                    <p class="service-description">Creating virtual training environments and digital hospital twins that enable predictive analytics, optimize clinical operations, and enhance patient care delivery.</p>
-                </div>
-                <div class="industry-card">
-                    <h3 class="industry-title">🏗️ Critical Infrastructure</h3>
-                    <p class="service-description">Developing comprehensive digital representations of mechanical equipment, chillers, generators, and building systems with integrated monitoring and control capabilities.</p>
                 </div>
             </div>
         </div>
@@ -585,119 +594,114 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 - twintech: Pioneering the digital twin revolution. All rights reserved.</p>
+            <p>&copy; 2025 TwinTech. Pioneering the digital twin revolution. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Digital Twin History Modal -->
-    <div id="historyModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>The Evolution of Digital Twin Technology</h2>
-            <p><strong>Digital twins</strong> represent one of the most transformative technologies of the 21st century, creating virtual replicas that mirror physical assets, processes, and systems in real-time.</p>
-            <h3>Historical Foundation</h3>
-            <p>The conceptual origins trace back to NASA's Apollo program, where engineers created physical duplicates of spacecraft for ground-based simulation and problem-solving. This early "twin" concept evolved through decades of technological advancement.</p>
-            <h3>Modern Applications</h3>
-            <p><strong>Healthcare:</strong> Digital twins revolutionize patient care through personalized treatment modeling, surgical simulation, and hospital operations optimization. They enable predictive analytics for disease progression and treatment outcomes.</p>
-            <p><strong>Infrastructure:</strong> Building Information Modeling (BIM) serves as the foundation for architectural digital twins, enabling real-time monitoring, predictive maintenance, and operational optimization throughout asset lifecycles.</p>
-            <p><strong>Manufacturing:</strong> Industry 4.0 implementations leverage digital twins for production optimization, quality control, and supply chain management, reducing costs while improving efficiency.</p>
-            <h3>Technological Architecture</h3>
-            <p>Contemporary digital twins integrate IoT sensors, artificial intelligence, machine learning algorithms, and cloud computing to create dynamic, interactive models that evolve with their physical counterparts.</p>
-            <h3>Future Trajectory</h3>
-            <p>As we advance toward Industry 5.0, digital twins will become increasingly sophisticated, incorporating generative AI, quantum computing, and advanced simulation capabilities to unlock unprecedented insights and automation possibilities.</p>
-        </div>
-    </div>
-
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href === '#') return; // Do nothing for placeholder links
-                
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
+        document.addEventListener('DOMContentLoaded', function() {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+            const hamburgerToggle = document.getElementById('hamburger-toggle');
+            const mobileNav = document.getElementById('mobile-nav');
+            const mobileNavLinks = mobileNav.querySelectorAll('a');
+            const logo = document.querySelector('.logo');
+
+            // --- Navigation Logic ---
+
+            // Toggle mobile nav
+            function toggleMobileNav() {
+                hamburgerToggle.classList.toggle('open');
+                mobileNav.classList.toggle('open');
+                document.body.classList.toggle('mobile-nav-open');
+                logo.classList.toggle('mobile-nav-open');
             }
-        });
 
-        // Scroll animations for sections
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+            hamburgerToggle.addEventListener('click', toggleMobileNav);
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+            // Close mobile nav when a link is clicked
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mobileNav.classList.contains('open')) {
+                        toggleMobileNav();
+                    }
+                });
+            });
+            
+            // Smooth scrolling for all anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Navbar scroll effects
+            window.addEventListener('scroll', () => {
+                // Add background and shadow on scroll
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+
+                // Collapse to hamburger on desktop scroll
+                if (window.innerWidth > 768) {
+                    if (window.scrollY > 100) {
+                        navbar.classList.add('nav-collapsed');
+                    } else {
+                        navbar.classList.remove('nav-collapsed');
+                    }
                 }
             });
-        }, observerOptions);
 
-        document.querySelectorAll('.section').forEach(section => {
-            observer.observe(section);
-        });
-
-        // Placeholder functions
-        function showServiceDetails(service) {
-            const details = {
-                dataeng: "Our Data Engineering as a Service offering provides end-to-end data pipeline architecture, ensuring your digital twins receive accurate, real-time data feeds from IoT sensors, building management systems, and operational databases.",
-                consulting: "We guide organizations through the complex process of digital twin implementation, from initial feasibility studies to full deployment, ensuring compatibility with existing systems and future scalability.",
-                integration: "Transform your static BIM models into living, breathing digital environments that provide real-time insights into building performance, energy efficiency, and occupant experience."
+            // --- Section Scroll Animations ---
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
             };
-            alert(details[service] || "Learn more about our comprehensive solutions.");
-        }
 
-        function launchDemo() {
-            alert("Interactive demo loading... This would typically open a comprehensive demonstration of our digital twin platforms showcasing real-world implementations.");
-        }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
 
-        function handleSubmit(event) {
-            event.preventDefault();
-            alert("Thank you for your inquiry! Our team will contact you within 24 hours to discuss your digital twin requirements.");
-            event.target.reset();
-        }
-        
-        document.getElementById('heroVideo').addEventListener('click', () => {
-            alert("Hero video would play here - showcasing twintech's digital twin implementations across various industries.");
-        });
+            document.querySelectorAll('.section').forEach(section => {
+                observer.observe(section);
+            });
 
-        // Modal functionality
-        const modal = document.getElementById('historyModal');
-        const historyLink = document.getElementById('historyLink');
-        const closeBtn = document.querySelector('.modal .close');
-
-        historyLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            modal.style.display = 'block';
-        });
-
-        function closeModal() {
-            modal.style.display = 'none';
-        }
-
-        closeBtn.addEventListener('click', closeModal);
-
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
+            // --- Placeholder Functions ---
+            window.showServiceDetails = function(service) {
+                const details = {
+                    dataeng: "Our Data Engineering as a Service offering provides end-to-end data pipeline architecture...",
+                    consulting: "We guide organizations through the complex process of digital twin implementation...",
+                    integration: "Transform your static BIM models into living, breathing digital environments..."
+                };
+                alert(details[service] || "Learn more about our comprehensive solutions.");
             }
+
+            window.launchDemo = function() {
+                alert("Interactive demo loading...");
+            }
+
+            window.handleSubmit = function(event) {
+                event.preventDefault();
+                alert("Thank you for your inquiry! Our team will contact you within 24 hours.");
+                event.target.reset();
+            }
+            
+            document.getElementById('heroVideo').addEventListener('click', () => {
+                alert("Hero video would play here.");
+            });
         });
     </script>
 </body>

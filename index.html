@@ -13,7 +13,7 @@
             --background-card: #FFFFFF;
             --text-dark: #1A1A1A;
             --text-light-gray: #555555;
-            --accent-cyan: #97f5f0;
+            --accent-cyan: #00A9E0;
             --border-light: rgba(0, 0, 0, 0.1);
 
             /* Typography */
@@ -66,9 +66,9 @@
         }
 
         .logo {
-            display: flex; /* NEW: For aligning image and text */
-            align-items: center; /* NEW: For aligning image and text */
-            gap: 0.75rem; /* NEW: Space between image and text */
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
             font-family: var(--font-heading);
             font-size: 1.8rem;
             font-weight: 700;
@@ -78,12 +78,12 @@
         }
         
         .logo img {
-            height: 40px; /* NEW: Control the size of the logo image */
+            height: 40px;
         }
 
         .nav-links {
             display: flex;
-            align-items: center; /* NEW: Align items vertically */
+            align-items: center;
             list-style: none;
             gap: 2rem;
         }
@@ -100,7 +100,6 @@
             color: var(--accent-cyan);
         }
         
-        /* NEW: Styling for the CTA button */
         .nav-links .cta-button {
             background-color: var(--accent-cyan);
             color: white;
@@ -115,33 +114,16 @@
             box-shadow: 0 5px 15px rgba(0, 169, 224, 0.4);
         }
 
-        /* Hero Section */
+        /* --- Hero Section --- */
         .hero {
-            padding-top: 80px; /* Add padding to account for fixed nav */
+            padding-top: 120px; /* Increased padding for nav */
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            align-items: flex-start; /* Align content to the top */
             justify-content: center;
             position: relative;
             overflow: hidden;
             background: var(--background-light);
-        }
-
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(0, 169, 224, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 80% 20%, rgba(0, 169, 224, 0.05) 0%, transparent 30%);
-            animation: float 20s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(1deg); }
         }
 
         .hero-content {
@@ -149,56 +131,79 @@
             color: var(--text-dark);
             z-index: 10;
             position: relative;
-        }
-
-        .hero-title {
-            font-family: var(--font-heading);
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-            letter-spacing: -1px;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.1rem, 2vw, 1.3rem);
-            color: var(--text-light-gray);
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .video-placeholder {
             width: 100%;
-            max-width: 800px;
-            aspect-ratio: 16 / 9;
-            background: #EAEAEA;
+            max-width: 900px; /* Control max width of hero content */
+        }
+        
+        .hero-banner-image {
+            width: 100%;
+            height: auto;
             border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 2rem auto;
-            border: 1px solid var(--border-light);
-            cursor: pointer;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
         }
 
-        .video-placeholder::before {
-            content: "▶";
-            font-size: 4rem;
-            color: rgba(0, 0, 0, 0.3);
+        /* --- "Ask My Building" Search Bar --- */
+        .search-bar-container {
+            margin-top: 2rem;
+        }
+
+        .search-bar {
+            background: var(--background-card);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-light-gray);
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .search-bar .cursor {
+            display: inline-block;
+            background-color: var(--text-dark);
+            width: 2px;
+            height: 1.2rem;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .suggestion-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .suggestion-button {
+            background: var(--background-card);
+            border: 1px solid var(--border-light);
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            text-align: left;
+            font-weight: 500;
+            color: var(--text-light-gray);
+            cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .video-placeholder:hover::before {
-            color: var(--accent-cyan);
-            transform: scale(1.1);
+        .suggestion-button:hover {
+            border-color: var(--accent-cyan);
+            color: var(--text-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.07);
         }
+
 
         /* Section Styles */
         .section {
             padding: 5rem 0;
-            scroll-margin-top: 80px; /* Offset for smooth scroll */
+            scroll-margin-top: 80px;
         }
         
         #about {
@@ -359,7 +364,6 @@
             box-shadow: 0 10px 30px rgba(0, 169, 224, 0.3);
         }
         
-        /* NEW: Main Logo Container before footer */
         .main-logo-container {
             padding: 4rem 0;
             text-align: center;
@@ -387,8 +391,8 @@
                 gap: 1rem;
             }
             .nav-links {
-                gap: 1rem; /* Smaller gap for mobile */
-                font-size: 0.9rem; /* Smaller font for mobile nav links */
+                gap: 1rem;
+                font-size: 0.9rem;
             }
             .hero-title {
                 font-size: 2.5rem;
@@ -425,16 +429,14 @@
     <nav id="navbar">
         <div class="container">
             <div class="nav-container">
-                <!-- UPDATED: Logo now contains image and text -->
                 <a href="#hero" class="logo">
-                    <img src="assets/images/ttlogo.png" alt="TwinTech Small Logo">
+                    <img src="assets/images/logosmall.png" alt="TwinTech Small Logo">
                     <span>TwinTech</span>
                 </a>
                 <ul class="nav-links">
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#demo">Demo</a></li>
-                    <!-- UPDATED: Added class for CTA button styling -->
                     <li><a href="#contact" class="cta-button">Contact</a></li>
                 </ul>
             </div>
@@ -443,12 +445,20 @@
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
-        <div class="hero-background"></div>
         <div class="container">
+            <!-- UPDATED HERO CONTENT -->
             <div class="hero-content fade-in-up">
-                <h1 class="hero-title">Digital Twin Innovation</h1>
-                <p class="hero-subtitle">We architect digital ecosystems that bridge the physical and virtual worlds, enabling intelligent decision-making across retail, healthcare, and infrastructure domains.</p>
-                <div class="video-placeholder" id="heroVideo"></div>
+                <img src="assets/images/herobanner0.png" alt="Digital Twin Hero Banner" class="hero-banner-image">
+                <div class="search-bar-container">
+                    <div class="search-bar">
+                        <span id="search-placeholder"></span><span class="cursor">|</span>
+                    </div>
+                    <div class="suggestion-buttons">
+                        <div class="suggestion-button">Show me foot traffic in the retail space...</div>
+                        <div class="suggestion-button">Which AC units are due for maintenance this quarter?</div>
+                        <div class="suggestion-button">Are there any energy usage anomalies?</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -457,7 +467,7 @@
     <section class="section" id="about">
         <div class="container">
             <h2 class="section-title">About TwinTech</h2>
-            <p class="hero-subtitle" style="margin-bottom: 0;">TwinTech is a pioneering force in digital twin readiness. We bridge the critical gap between traditional construction and intelligent, data-driven buildings. Our mission is to embed a 'digital nervous system' into every asset, transforming static structures into dynamic, learning environments that optimize for efficiency, sustainability, and performance across their entire lifecycle.</p>
+            <p class="hero-subtitle" style="margin-bottom: 0; max-width: 800px;">TwinTech is a pioneering force in digital twin readiness. We bridge the critical gap between traditional construction and intelligent, data-driven buildings. Our mission is to embed a 'digital nervous system' into every asset, transforming static structures into dynamic, learning environments that optimize for efficiency, sustainability, and performance across their entire lifecycle.</p>
         </div>
     </section>
 
@@ -519,7 +529,7 @@
         </div>
     </section>
 
-    <!-- NEW: Main Logo Section -->
+    <!-- Main Logo Section -->
     <section class="main-logo-container">
         <img src="assets/images/twintechlogomain.png" alt="TwinTech Main Logo">
     </section>
@@ -533,7 +543,44 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Smooth scrolling for all anchor links
+            // --- Typing Animation for Search Bar ---
+            const placeholder = document.getElementById('search-placeholder');
+            const questions = [
+                "Show me foot traffic in the retail space...",
+                "Which AC units are due for maintenance this quarter?",
+                "Are there any energy usage anomalies?",
+                "Simulate a power outage on floor 3...",
+                "What is the current air quality in the ICU?"
+            ];
+            let questionIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function type() {
+                const currentQuestion = questions[questionIndex];
+                if (isDeleting) {
+                    placeholder.textContent = currentQuestion.substring(0, charIndex--);
+                } else {
+                    placeholder.textContent = currentQuestion.substring(0, charIndex++);
+                }
+
+                let typeSpeed = isDeleting ? 50 : 150;
+
+                if (!isDeleting && charIndex === currentQuestion.length) {
+                    typeSpeed = 2000; // Pause at the end
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    questionIndex = (questionIndex + 1) % questions.length;
+                    typeSpeed = 500; // Pause before typing next
+                }
+
+                setTimeout(type, typeSpeed);
+            }
+            type();
+
+
+            // --- Smooth Scrolling ---
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -548,7 +595,7 @@
                 });
             });
 
-            // Navbar scroll effect
+            // --- Navbar Scroll Effect ---
             const navbar = document.getElementById('navbar');
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 50) {
@@ -558,7 +605,7 @@
                 }
             });
 
-            // Section Scroll Animations
+            // --- Section Scroll Animations ---
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
@@ -576,7 +623,7 @@
                 observer.observe(section);
             });
 
-            // Placeholder Functions
+            // --- Placeholder Functions ---
             window.showServiceDetails = function(service) {
                 const details = {
                     dataeng: "Our Data Engineering as a Service offering provides end-to-end data pipeline architecture...",
@@ -595,10 +642,6 @@
                 alert("Thank you for your inquiry! Our team will contact you within 24 hours.");
                 event.target.reset();
             }
-            
-            document.getElementById('heroVideo').addEventListener('click', () => {
-                alert("Hero video would play here.");
-            });
         });
     </script>
 </body>

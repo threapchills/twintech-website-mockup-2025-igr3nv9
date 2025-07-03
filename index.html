@@ -209,7 +209,7 @@
             background: var(--background-light);
         }
 
-        /* --- NEW: About Section Grid Layout --- */
+        /* --- About Section Grid Layout --- */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1.5fr; /* Adjust column ratio as needed */
@@ -220,6 +220,15 @@
         .about-left-column h2 {
             font-family: var(--font-heading);
             font-size: 2.5rem;
+            margin-bottom: 1.5rem; /* Increased margin */
+        }
+        
+        /* NEW: Style for the mid-level heading */
+        .about-subheading {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.4;
             margin-bottom: 1rem;
         }
 
@@ -536,11 +545,12 @@
     <!-- About Section -->
     <section class="section" id="about">
         <div class="container">
-            <!-- UPDATED: Replaced old content with a two-column grid -->
             <div class="about-grid">
                 <div class="about-left-column">
+                    <!-- UPDATED: Text split into h2, p.about-subheading, and p -->
                     <h2>We are TwinTech.</h2>
-                    <p>We meet you wherever you are to get your business twin-ready. We connect the dots between physical and digital systems, unlocking the full value of your building.</p>
+                    <p class="about-subheading">We meet you wherever you are to get your business twin-ready.</p>
+                    <p>We connect the dots between physical and digital systems, unlocking the full value of your building.</p>
                 </div>
                 <div class="about-right-column">
                     <!-- Quadrant 1 -->

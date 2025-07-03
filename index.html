@@ -500,7 +500,8 @@
             max-width: 1100px;
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
             animation-name: animatetop;
-            animation-duration: 0.4s
+            animation-duration: 0.4s;
+            background-color: #fefefe; /* Added for the citation area */
         }
         
         .modal-body {
@@ -540,6 +541,23 @@
             color: #bbb;
             text-decoration: none;
             cursor: pointer;
+        }
+        
+        /* NEW: Citation Styling */
+        .modal-citation {
+            padding: 10px 20px;
+            background-color: #f1f1f1;
+            font-size: 11px;
+            color: #888;
+            text-align: left;
+            line-height: 1.4;
+        }
+        .modal-citation a {
+            color: #555;
+            text-decoration: none;
+        }
+        .modal-citation a:hover {
+            text-decoration: underline;
         }
 
 
@@ -768,8 +786,11 @@
       <div class="modal-content">
         <span class="close">&times;</span>
         <div class="modal-body">
-          <!-- UPDATED: Replaced with the user's provided Sketchfab embed code -->
-          <div class="sketchfab-embed-wrapper"> <iframe title="Brutalist Interior VR Room" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/47963374248b4bf6a50ffa76733ba74b/embed"> </iframe> </div>
+          <div class="sketchfab-embed-wrapper"> <iframe title="Charité University Hospital - Operating Room" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/9ec46c4d615a4581a235eebfb162f574/embed"> </iframe> </div>
+        </div>
+        <!-- NEW: Citation Added -->
+        <div class="modal-citation">
+            <p>Demo model: <a href="https://sketchfab.com/3d-models/charite-university-hospital-operating-room-9ec46c4d615a4581a235eebfb162f574?utm_medium=embed&utm_campaign=share-popup&utm_content=9ec46c4d615a4581a235eebfb162f574" target="_blank" rel="nofollow">"Charité University Hospital - Operating Room"</a> by ChrisRE on Sketchfab. The underlying research for this model is cited as: Queisner M, Pogorzhelskiy M, Remde C, Pratschke J, Sauer IM. VolumetricOR: A New Approach to Simulate Surgical Interventions in Virtual Reality for Training and Education. Surg Innov. 2022 Jun;29(3):406-415. doi: 10.1177/15533506211054240. Epub 2022 Feb 9. PMID: 35137646; PMCID: PMC9438748. <a href="https://pubmed.ncbi.nlm.nih.gov/35137646/" target="_blank" rel="nofollow">View Publication</a>.</p>
         </div>
       </div>
     </div>

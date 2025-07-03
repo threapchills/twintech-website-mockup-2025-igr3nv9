@@ -1,0 +1,13 @@
+/ (repository root)
+├── index.html
+├── assets/
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   └── main.js
+│   └── images/
+│       ├── blueprint-base.png
+│       ├── blueprint-lines.png
+│       ├── brain-model.png
+│       └── twintech-logo.svg
+└── README.md

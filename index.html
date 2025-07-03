@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TwinTech | Digital Twin Infrastructure Solutions</title>
-    <!-- NEW: Added three.js library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
@@ -357,35 +356,41 @@
             line-height: 1.6;
         }
 
-        /* Demo Section */
-        .demo-section {
-            background: linear-gradient(135deg, var(--accent-cyan), #007B9E);
+        /* --- UPDATED: Demo Section --- */
+        #demo {
+            background: #111; /* Dark background for contrast */
+            padding: 5rem 0;
             color: white;
             text-align: center;
         }
+        
+        #demo .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-        .demo-section .section-title, .demo-section p {
+        #demo-canvas-container {
+            width: 100%;
+            max-width: 800px;
+            height: 500px;
+            margin-top: 2rem;
+            cursor: grab;
+        }
+        
+        #demo-canvas-container:active {
+            cursor: grabbing;
+        }
+        
+        #demo .section-title {
             color: white;
         }
-
-        .demo-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--accent-cyan);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-            border: none;
+        
+        #demo p {
+            color: var(--text-secondary);
+            max-width: 600px;
         }
 
-        .demo-button:hover {
-            transform: translateY(-2px) scale(1.05);
-            background: white;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
 
         /* Contact Section */
         .contact {
@@ -467,67 +472,6 @@
             text-align: center;
             padding: 2rem 0;
         }
-        
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.8);
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            position: relative;
-            margin: 5% auto;
-            padding: 0;
-            width: 90%;
-            max-width: 1100px;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-            animation-name: animatetop;
-            animation-duration: 0.4s
-        }
-        
-        .modal-body {
-            padding: 0;
-            height: 85vh;
-            background: #000; /* Dark background for the 3D scene */
-        }
-        
-        /* UPDATED: Canvas container inside the modal */
-        #demo-canvas-container {
-            width: 100%;
-            height: 100%;
-        }
-
-        @keyframes animatetop {
-            from {top: -300px; opacity: 0}
-            to {top: 0; opacity: 1}
-        }
-
-        .close {
-            color: white;
-            position: absolute;
-            top: 10px;
-            right: 25px;
-            font-size: 35px;
-            font-weight: bold;
-            transition: 0.3s;
-            z-index: 2001; /* Ensure it's above the canvas */
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
 
         /* Responsive Design */
         @media (max-width: 992px) {
@@ -702,12 +646,12 @@
         </div>
     </section>
 
-    <!-- Demo Section -->
-    <section class="section demo-section" id="demo">
+    <!-- UPDATED: Demo Section -->
+    <section class="section" id="demo">
         <div class="container">
-            <h2 class="section-title">Experience Our Technology</h2>
-            <p>Witness the power of digital twin technology through our interactive demonstrations showcasing real-world implementations across various industries.</p>
-            <a href="#" class="demo-button" id="launchDemoBtn">Launch Interactive Demo</a>
+            <h2 class="section-title">Interactive Digital Twin</h2>
+            <p>This is a conceptual model of a building's digital twin. Click and drag to rotate the model and explore its different layers.</p>
+            <div id="demo-canvas-container"></div>
         </div>
     </section>
 
@@ -748,17 +692,6 @@
         </div>
     </footer>
     
-    <!-- Demo Modal -->
-    <div id="demoModal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <div class="modal-body">
-            <!-- UPDATED: Container for the 3D canvas -->
-            <div id="demo-canvas-container"></div>
-        </div>
-      </div>
-    </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // --- Typing Animation for Search Bar ---
@@ -825,76 +758,96 @@
             });
 
             // --- Section Scroll Animations ---
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
+            const sectionObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
                     }
                 });
-            }, observerOptions);
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
             document.querySelectorAll('.section').forEach(section => {
-                observer.observe(section);
+                sectionObserver.observe(section);
             });
             
-            // --- Demo Modal Logic & three.js ---
-            const modal = document.getElementById("demoModal");
-            const btn = document.getElementById("launchDemoBtn");
-            const span = document.getElementsByClassName("close")[0];
+            // --- UPDATED: 3D Demo Logic ---
+            const demoSection = document.getElementById('demo');
             const canvasContainer = document.getElementById('demo-canvas-container');
-
-            let scene, camera, renderer, controls, building, animationId;
+            let scene, camera, renderer, controls, dataPoints, animationId;
             let isDemoInitialized = false;
 
             function initDemo() {
-                if (isDemoInitialized) return;
-
+                if (isDemoInitialized || !canvasContainer) return;
+                
                 // Scene
                 scene = new THREE.Scene();
 
                 // Camera
                 camera = new THREE.PerspectiveCamera(75, canvasContainer.clientWidth / canvasContainer.clientHeight, 0.1, 1000);
-                camera.position.z = 5;
+                camera.position.set(5, 4, 5);
+                camera.lookAt(scene.position);
 
                 // Renderer
-                renderer = new THREE.WebGLRenderer({ antialias: true });
+                renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
                 renderer.setSize(canvasContainer.clientWidth, canvasContainer.clientHeight);
-                renderer.setClearColor(0x000000, 1); // Black background
+                renderer.setPixelRatio(window.devicePixelRatio);
                 canvasContainer.appendChild(renderer.domElement);
                 
-                // Controls
+                // Controls - Only rotate on drag
                 controls = new THREE.OrbitControls(camera, renderer.domElement);
                 controls.enableDamping = true;
                 controls.dampingFactor = 0.05;
+                controls.enableZoom = true;
+                controls.autoRotate = false; // Disable auto-rotation
 
-                // Building Model (simple stacked boxes)
-                const material = new THREE.MeshBasicMaterial({ 
-                    color: 0x66cccc, // Your accent cyan
-                    wireframe: true 
-                });
-                
-                const buildingGroup = new THREE.Group();
-                const base = new THREE.Mesh(new THREE.BoxGeometry(2, 1, 2), material);
-                const mid = new THREE.Mesh(new THREE.BoxGeometry(1.8, 1, 1.8), material);
-                mid.position.y = 1;
-                const top = new THREE.Mesh(new THREE.BoxGeometry(1.6, 1, 1.6), material);
-                top.position.y = 2;
-                
-                buildingGroup.add(base);
-                buildingGroup.add(mid);
-                buildingGroup.add(top);
-                scene.add(buildingGroup);
-                building = buildingGroup;
+                // Lighting
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+                scene.add(ambientLight);
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                directionalLight.position.set(5, 10, 7.5);
+                scene.add(directionalLight);
+
+                // Layer 1: Structural Wireframe
+                const geo = new THREE.BoxGeometry(3, 3, 3);
+                const mat = new THREE.MeshBasicMaterial({ color: 0x66cccc, wireframe: true });
+                const structuralLayer = new THREE.Mesh(geo, mat);
+                scene.add(structuralLayer);
+
+                // Layer 2: MEP (Pipes)
+                const mepMaterial = new THREE.MeshStandardMaterial({ color: 0xffa500, roughness: 0.5 });
+                const pipe1 = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 4, 8), mepMaterial);
+                pipe1.rotation.z = Math.PI / 2;
+                pipe1.position.set(0, 0.5, 0);
+                const pipe2 = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 4, 8), mepMaterial);
+                pipe2.rotation.x = Math.PI / 2;
+                pipe2.position.set(0, -0.5, 0);
+                scene.add(pipe1);
+                scene.add(pipe2);
+
+                // Layer 3: Data Points (Sprites)
+                dataPoints = new THREE.Group();
+                const spriteMaterial = new THREE.SpriteMaterial({ color: 0xffffff, fog: false, transparent: true });
+                for (let i = 0; i < 50; i++) {
+                    const sprite = new THREE.Sprite(spriteMaterial);
+                    const x = (Math.random() - 0.5) * 3;
+                    const y = (Math.random() - 0.5) * 3;
+                    const z = (Math.random() - 0.5) * 3;
+                    // Ensure points are near the surface
+                    const axis = ['x', 'y', 'z'][Math.floor(Math.random() * 3)];
+                    const sign = Math.random() > 0.5 ? 1 : -1;
+                    if (axis === 'x') sprite.position.set(1.5 * sign, y, z);
+                    if (axis === 'y') sprite.position.set(x, 1.5 * sign, z);
+                    if (axis === 'z') sprite.position.set(x, y, 1.5 * sign);
+                    sprite.scale.set(0.05, 0.05, 0.05);
+                    dataPoints.add(sprite);
+                }
+                scene.add(dataPoints);
 
                 // Handle window resize
                 window.addEventListener('resize', onWindowResize, false);
                 
                 isDemoInitialized = true;
+                animate();
             }
             
             function onWindowResize() {
@@ -906,31 +859,34 @@
 
             function animate() {
                 animationId = requestAnimationFrame(animate);
-                if (building) {
-                    building.rotation.y += 0.005;
+                
+                // Pulsate data points
+                const time = Date.now() * 0.005;
+                if(dataPoints) {
+                    dataPoints.children.forEach((sprite, i) => {
+                        const scale = Math.sin(time + i) * 0.5 + 0.5;
+                        sprite.material.opacity = scale;
+                    });
                 }
+                
                 controls.update();
                 renderer.render(scene, camera);
             }
-
-            btn.onclick = function(e) {
-                e.preventDefault();
-                modal.style.display = "block";
-                initDemo();
-                animate();
+            
+            // --- Observer to start demo when visible ---
+            const demoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        initDemo();
+                        demoObserver.unobserve(entry.target); // Only run once
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            if (demoSection) {
+                demoObserver.observe(demoSection);
             }
 
-            span.onclick = function() {
-                modal.style.display = "none";
-                cancelAnimationFrame(animationId);
-            }
-
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                    cancelAnimationFrame(animationId);
-                }
-            }
 
             // --- Placeholder Functions ---
             window.showServiceDetails = function(service) {

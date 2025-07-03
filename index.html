@@ -248,26 +248,31 @@
             padding: 1.5rem;
             border-radius: 15px;
             border: 1px solid var(--border-light);
+            /* UPDATED: Added flex properties to center content */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
         .how-we-do-it-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--background-card); /* Changed background to let image show */
+            /* UPDATED: Increased size */
+            width: 60px;
+            height: 60px;
+            background: var(--background-card);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1rem;
             color: white;
-            padding: 5px; /* Add padding for the image */
+            padding: 5px;
         }
         
-        /* UPDATED: Styling for the image inside the icon container */
         .how-we-do-it-icon img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Ensures image fits without distortion */
+            object-fit: contain;
         }
 
         .how-we-do-it-card h4 {
@@ -276,13 +281,12 @@
             margin-bottom: 0.5rem;
         }
         
-        /* NEW: Full width banner section */
         .full-width-banner {
-            padding: 0; /* Remove default section padding */
+            padding: 0;
         }
         .full-width-banner img {
             width: 100%;
-            display: block; /* Remove bottom space under image */
+            display: block;
         }
 
         #services {
@@ -566,7 +570,6 @@
                     <!-- Quadrant 1 -->
                     <div class="how-we-do-it-card">
                         <div class="how-we-do-it-icon">
-                            <!-- UPDATED: Replaced SVG with an <img> tag -->
                             <img src="assets/images/icon-procurement.png" alt="Smart Procurement Icon">
                         </div>
                         <h4>SMART PROCUREMENT</h4>
@@ -575,7 +578,6 @@
                     <!-- Quadrant 2 -->
                     <div class="how-we-do-it-card">
                         <div class="how-we-do-it-icon">
-                             <!-- UPDATED: Replaced SVG with an <img> tag -->
                             <img src="assets/images/icon-consulting.png" alt="Readiness Consulting Icon">
                         </div>
                         <h4>READINESS CONSULTING</h4>
@@ -584,7 +586,6 @@
                     <!-- Quadrant 3 -->
                     <div class="how-we-do-it-card">
                         <div class="how-we-do-it-icon">
-                             <!-- UPDATED: Replaced SVG with an <img> tag -->
                             <img src="assets/images/icon-unification.png" alt="Data Unification Icon">
                         </div>
                         <h4>DATA UNIFICATION</h4>
@@ -593,7 +594,6 @@
                     <!-- Quadrant 4 -->
                     <div class="how-we-do-it-card">
                         <div class="how-we-do-it-icon">
-                             <!-- UPDATED: Replaced SVG with an <img> tag -->
                             <img src="assets/images/icon-maintenance.png" alt="Augmented Maintenance Icon">
                         </div>
                         <h4>DIGITALLY AUGMENTED MAINTENANCE</h4>
@@ -604,7 +604,7 @@
         </div>
     </section>
 
-    <!-- NEW: Lower Hero Banner Section -->
+    <!-- Lower Hero Banner Section -->
     <section class="section full-width-banner">
         <img src="assets/images/herobannerlower.png" alt="Digital Twin Technology Banner">
     </section>

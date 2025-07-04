@@ -378,6 +378,15 @@
             color: white;
         }
 
+        /* NEW: Container for multiple demo buttons */
+        .demo-buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
         .demo-button {
             display: inline-block;
             padding: 1rem 2rem;
@@ -387,7 +396,6 @@
             border-radius: 50px;
             font-weight: 600;
             transition: all 0.3s ease;
-            margin-top: 1rem;
             border: none;
         }
 
@@ -509,11 +517,7 @@
             height: 85vh;
         }
         
-        .modal-body .sketchfab-embed-wrapper {
-            width: 100%;
-            height: 100%;
-        }
-        
+        .modal-body .sketchfab-embed-wrapper,
         .modal-body iframe {
             width: 100%;
             height: 100%;
@@ -737,10 +741,14 @@
     <!-- Demo Section -->
     <section class="section demo-section" id="demo">
         <div class="container">
-            <!-- UPDATED: Demo section copy restored -->
             <h2 class="section-title">A Glimpse into Virtualization</h2>
             <p>This interactive model demonstrates the feel of navigating a virtual space. Our full digital twin solutions go much further, integrating real-time data to power everything from immersive retail experiences to advanced medical training simulations.</p>
-            <a href="#" class="demo-button" id="launchDemoBtn">Launch Interactive Demo</a>
+            <!-- UPDATED: Container for multiple demo buttons -->
+            <div class="demo-buttons-container">
+                <a href="#" class="demo-button" id="launchDemoBtn1">Launch Interactive Demo 1</a>
+                <a href="#" class="demo-button" id="launchDemoBtn2">Launch Interactive Demo 2</a>
+                <a href="#" class="demo-button" id="launchDemoBtn3">Launch Interactive Demo 3</a>
+            </div>
         </div>
     </section>
 
@@ -781,15 +789,33 @@
         </div>
     </footer>
     
-    <!-- Demo Modal -->
-    <div id="demoModal" class="modal">
+    <!-- Demo Modals -->
+    <div id="demoModal1" class="modal">
       <div class="modal-content">
-        <span class="close">&times;</span>
+        <span class="close" data-modal-id="demoModal1">&times;</span>
         <div class="modal-body">
           <div class="sketchfab-embed-wrapper"> <iframe title="Charité University Hospital - Operating Room" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/9ec46c4d615a4581a235eebfb162f574/embed"> </iframe> </div>
         </div>
         <div class="modal-citation">
             <p>Demo model: <a href="https://sketchfab.com/3d-models/charite-university-hospital-operating-room-9ec46c4d615a4581a235eebfb162f574?utm_medium=embed&utm_campaign=share-popup&utm_content=9ec46c4d615a4581a235eebfb162f574" target="_blank" rel="nofollow">"Charité University Hospital - Operating Room"</a> by ChrisRE on Sketchfab. The underlying research for this model is cited as: Queisner M, Pogorzhelskiy M, Remde C, Pratschke J, Sauer IM. VolumetricOR: A New Approach to Simulate Surgical Interventions in Virtual Reality for Training and Education. Surg Innov. 2022 Jun;29(3):406-415. doi: 10.1177/15533506211054240. Epub 2022 Feb 9. PMID: 35137646; PMCID: PMC9438748. <a href="https://pubmed.ncbi.nlm.nih.gov/35137646/" target="_blank" rel="nofollow">View Publication</a>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="demoModal2" class="modal">
+      <div class="modal-content">
+        <span class="close" data-modal-id="demoModal2">&times;</span>
+        <div class="modal-body">
+          <iframe src="https://my.matterport.com/show/?m=mHeaDfTYcMR" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div id="demoModal3" class="modal">
+      <div class="modal-content">
+        <span class="close" data-modal-id="demoModal3">&times;</span>
+        <div class="modal-body">
+          <iframe src="https://vr.spinview.io/cafefactory/?s=pano63474" allowfullscreen></iframe>
         </div>
       </div>
     </div>
@@ -877,24 +903,35 @@
                 observer.observe(section);
             });
             
-            // --- Demo Modal Logic ---
-            const modal = document.getElementById("demoModal");
-            const btn = document.getElementById("launchDemoBtn");
-            const span = document.getElementsByClassName("close")[0];
-
-            btn.onclick = function(e) {
-                e.preventDefault();
-                modal.style.display = "block";
+            // --- Demo Modal Logic for Multiple Modals ---
+            const modals = document.querySelectorAll('.modal');
+            
+            function openModal(modalId) {
+                const modal = document.getElementById(modalId);
+                if(modal) modal.style.display = "block";
             }
 
-            span.onclick = function() {
-                modal.style.display = "none";
+            function closeModal(modalId) {
+                const modal = document.getElementById(modalId);
+                if(modal) modal.style.display = "none";
             }
+
+            document.getElementById("launchDemoBtn1").onclick = (e) => { e.preventDefault(); openModal('demoModal1'); };
+            document.getElementById("launchDemoBtn2").onclick = (e) => { e.preventDefault(); openModal('demoModal2'); };
+            document.getElementById("launchDemoBtn3").onclick = (e) => { e.preventDefault(); openModal('demoModal3'); };
+
+            document.querySelectorAll('.close').forEach(closeBtn => {
+                closeBtn.onclick = () => {
+                    closeModal(closeBtn.getAttribute('data-modal-id'));
+                };
+            });
 
             window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
+                modals.forEach(modal => {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                });
             }
 
         });

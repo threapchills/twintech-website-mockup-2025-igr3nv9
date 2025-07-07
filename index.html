@@ -282,14 +282,22 @@
         .full-width-banner {
             padding: 0;
             line-height: 0;
-            overflow: hidden; /* UPDATED: For Ken Burns effect */
+            overflow: hidden; 
         }
         .full-width-banner img {
             width: 100%;
             display: block;
         }
 
-        /* UPDATED: Ken Burns Effect */
+        /* NEW: Class for bordered banners */
+        .bordered-banner-image {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            display: block;
+        }
+
         .ken-burns {
             animation: ken-burns 20s ease-in-out infinite alternate;
         }
@@ -729,9 +737,11 @@
         </div>
     </section>
 
-    <!-- Lower Hero Banner Section -->
-    <section class="section full-width-banner">
-        <img src="assets/images/heromiddle1.png" alt="Digital Twin Technology Banner">
+    <!-- UPDATED: Lower Hero Banner Section -->
+    <section class="section" style="padding-top: 0; padding-bottom: 0;">
+        <div class="container">
+            <img src="assets/images/herobottom.png" alt="Digital Twin Technology Banner" class="bordered-banner-image">
+        </div>
     </section>
 
     <!-- Services Section -->
@@ -785,14 +795,14 @@
     <!-- More Solutions Section -->
     <section class="section" id="more-solutions">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Twinning is winning!</h2>
-        </div>
-        <div class="full-width-banner animate-on-scroll" style="padding-top: 2rem; --animation-delay: 0.2s;">
-            <img src="assets/images/heromore2.png" alt="Advanced Digital Twin Application 1" class="ken-burns">
-        </div>
-             <h2 class="section-title animate-on-scroll" style="margin-top: 4rem;">Simulate. Analyse. Optimise.</h2>
-        <div class="full-width-banner animate-on-scroll" style="padding-top: 2rem; --animation-delay: 0.4s;">
-            <img src="assets/images/heromore1.png" alt="Advanced Digital Twin Application 2" class="ken-burns">
+            <h2 class="section-title animate-on-scroll">Simulate. Analyse. Optimise.</h2>
+            <!-- UPDATED: Banners wrapped in container -->
+            <div class="animate-on-scroll" style="--animation-delay: 0.2s; margin-bottom: 3rem;">
+                <img src="assets/images/heromore2.png" alt="Advanced Digital Twin Application 1" class="bordered-banner-image ken-burns">
+            </div>
+            <div class="animate-on-scroll" style="--animation-delay: 0.4s;">
+                <img src="assets/images/heromore1.png" alt="Advanced Digital Twin Application 2" class="bordered-banner-image ken-burns">
+            </div>
         </div>
     </section>
 
@@ -802,11 +812,7 @@
             <div class="contact-content">
                 <h2 class="section-title">Let's connect</h2>
                 <p class="hero-subtitle">Invest now in your digital future and join us in a shared commitment to build smarter with data. Get in touch via the form below, and let's link up.</p>
-                <!-- UPDATED: Form now points to Formspree -->
                 <form class="contact-form" action="https://formspree.io/f/xrbkvnaq" method="POST">
-                    <!-- 
-                        NB:  To change the recipient email address used in the form, you will do it in your Formspree account settings, not in the code.
-                    -->
                     <div class="form-group">
                         <input type="text" name="name" placeholder="Your Name" required>
                     </div>

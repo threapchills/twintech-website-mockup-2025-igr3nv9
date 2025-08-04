@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>twintech | Digital Twin Infrastructure Solutions</title>
-    <!-- UPDATED: Added Favicon -->
     <link rel="icon" type="image/png" href="assets/images/ttlogo.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@700&display=swap');
@@ -283,14 +282,21 @@
         .full-width-banner {
             padding: 0;
             line-height: 0;
-            overflow: hidden; /* UPDATED: For Ken Burns effect */
+            overflow: hidden; 
         }
         .full-width-banner img {
             width: 100%;
             display: block;
         }
 
-        /* UPDATED: Ken Burns Effect */
+        .bordered-banner-image {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            display: block;
+        }
+
         .ken-burns {
             animation: ken-burns 20s ease-in-out infinite alternate;
         }
@@ -650,7 +656,6 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav id="navbar">
         <div class="container">
             <div class="nav-container">
@@ -668,7 +673,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="container">
             <div class="hero-content animate-on-scroll">
@@ -687,7 +691,6 @@
         </div>
     </section>
     
-    <!-- About Section -->
     <section class="section" id="about">
         <div class="container">
             <div class="about-grid">
@@ -730,7 +733,6 @@
         </div>
     </section>
 
-    <!-- Lower Hero Banner Section -->
     <section class="section">
         <div class="container">
             <div class="hero-content animate-on-scroll">
@@ -739,7 +741,6 @@
         </div>
     </section>
 
-    <!-- Services Section -->
     <section class="section" id="services">
         <img src="assets/images/herobannerlower1.png" alt="Digital Twin Technology Banner" class="services-background-image">
         <div class="container">
@@ -770,7 +771,6 @@
         </div>
     </section>
 
-    <!-- Demo Section -->
     <section class="section demo-section" id="demo">
         <div class="container">
             <div class="demo-grid">
@@ -787,7 +787,6 @@
         </div>
     </section>
 
-    <!-- More Solutions Section -->
     <section class="section" id="more-solutions">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Twinning is winning!</h2>
@@ -801,17 +800,12 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
             <div class="contact-content">
                 <h2 class="section-title">Let's connect</h2>
                 <p class="hero-subtitle">Invest now in your digital future and join us in a shared commitment to build smarter with data. Get in touch via the form below, and let's link up.</p>
-                <!-- UPDATED: Form now points to Formspree -->
                 <form class="contact-form" action="https://formspree.io/f/xrbkvnaq" method="POST">
-                    <!-- 
-                        NB:  To change the recipient email address used in the form, you will do it in your Formspree account settings, not in the code.
-                    -->
                     <div class="form-group">
                         <input type="text" name="name" placeholder="Your Name" required>
                     </div>
@@ -830,19 +824,16 @@
         </div>
     </section>
 
-    <!-- Main Logo Section -->
     <section class="main-logo-container">
         <img src="assets/images/logosmalltrans.png" alt="TwinTech Main Logo">
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; 2025 twintech. Build smarter with data and digital twins.</p>
         </div>
     </footer>
     
-    <!-- Demo Modals -->
     <div id="demoModal1" class="modal">
       <div class="modal-content">
         <span class="close" data-modal-id="demoModal1">&times;</span>

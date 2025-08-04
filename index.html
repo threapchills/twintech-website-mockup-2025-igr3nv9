@@ -1,990 +1,1012 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>twintech | Digital Twin Infrastructure Solutions</title>
-    <link rel="icon" type="image/png" href="assets/images/ttlogo.png">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@700&display=swap');
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>twintech | Digital Twin Infrastructure Solutions</title>
+     <link rel="icon" type="image/png" href="assets/images/ttlogo.png">
+     <style>
+         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@700&display=swap');
 
-        :root {
-            /* Light Mode Color Palette */
-            --background-light: #F9F9F9;
-            --background-card: #FFFFFF;
-            --text-dark: #1A1A1A;
-            --text-light-gray: #555555;
-            --accent-cyan: #66cccc;
-            --border-light: rgba(0, 0, 0, 0.1);
+         :root {
+             /* Light Mode Color Palette */
+             --background-light: #F9F9F9;
+             --background-card: #FFFFFF;
+             --text-dark: #1A1A1A;
+             --text-light-gray: #555555;
+             --accent-cyan: #66cccc;
+             --border-light: rgba(0, 0, 0, 0.1);
 
-            /* Typography */
-            --font-heading: 'Sora', sans-serif;
-            --font-body: 'Inter', sans-serif;
-        }
+             /* Typography */
+             --font-heading: 'Sora', sans-serif;
+             --font-body: 'Inter', sans-serif;
+         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+         * {
+             margin: 0;
+             padding: 0;
+             box-sizing: border-box;
+         }
 
-        body {
-            font-family: var(--font-body);
-            line-height: 1.6;
-            color: var(--text-dark);
-            background: var(--background-light);
-            overflow-x: hidden;
-        }
+         body {
+             font-family: var(--font-body);
+             line-height: 1.6;
+             color: var(--text-dark);
+             background: var(--background-light);
+             overflow-x: hidden;
+         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+         .container {
+             max-width: 1200px;
+             margin: 0 auto;
+             padding: 0 20px;
+         }
 
-        /* --- Navigation --- */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(249, 249, 249, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid var(--border-light);
-        }
+         /* --- Navigation --- */
+         nav {
+             position: fixed;
+             top: 0;
+             width: 100%;
+             background: rgba(249, 249, 249, 0.8);
+             backdrop-filter: blur(10px);
+             z-index: 1000;
+             padding: 1rem 0;
+             transition: all 0.3s ease;
+             border-bottom: 1px solid var(--border-light);
+         }
 
-        nav.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
+         nav.scrolled {
+             background: rgba(255, 255, 255, 0.95);
+             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+         }
 
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+         .nav-container {
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--accent-cyan);
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
+         .logo {
+             display: flex;
+             align-items: center;
+             gap: 0.75rem;
+             font-family: var(--font-heading);
+             font-size: 1.8rem;
+             font-weight: 700;
+             color: var(--accent-cyan);
+             text-decoration: none;
+             letter-spacing: -0.5px;
+         }
         
-        .logo img {
-            height: 40px;
-        }
+         .logo img {
+             height: 40px;
+         }
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-            list-style: none;
-            gap: 2rem;
-        }
+         .nav-links {
+             display: flex;
+             align-items: center;
+             list-style: none;
+             gap: 2rem;
+         }
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
+         .nav-links a {
+             text-decoration: none;
+             color: var(--text-dark);
+             font-weight: 500;
+             transition: color 0.3s ease;
+             position: relative;
+         }
 
-        .nav-links a:hover {
-            color: var(--accent-cyan);
-        }
+         .nav-links a:hover {
+             color: var(--accent-cyan);
+         }
         
-        .nav-links .cta-button {
-            background-color: var(--accent-cyan);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-        }
+         .nav-links .cta-button {
+             background-color: var(--accent-cyan);
+             color: white;
+             padding: 0.5rem 1rem;
+             border-radius: 50px;
+             transition: all 0.3s ease;
+         }
         
-        .nav-links .cta-button:hover {
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 169, 224, 0.4);
-        }
+         .nav-links .cta-button:hover {
+             color: white;
+             transform: translateY(-2px);
+             box-shadow: 0 5px 15px rgba(0, 169, 224, 0.4);
+         }
 
-        /* --- Hero Section --- */
-        .hero {
-            padding-top: 120px; /* Increased padding for nav */
-            min-height: 100vh;
-            display: flex;
-            align-items: flex-start; /* Align content to the top */
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            background: var(--background-light);
-        }
+         /* --- Hero Section --- */
+         .hero {
+             padding-top: 120px; /* Increased padding for nav */
+             min-height: 100vh;
+             display: flex;
+             align-items: flex-start; /* Align content to the top */
+             justify-content: center;
+             position: relative;
+             overflow: hidden;
+             background: var(--background-light);
+         }
 
-        .hero-content {
-            text-align: center;
-            color: var(--text-dark);
-            z-index: 10;
-            position: relative;
-            width: 100%;
-            max-width: 900px; /* Control max width of hero content */
-            margin: 0 auto; /* ADDED: This centers the content block */
-        }
+         .hero-content {
+             text-align: center;
+             color: var(--text-dark);
+             z-index: 10;
+             position: relative;
+             width: 100%;
+             max-width: 900px; /* Control max width of hero content */
+             margin: 0 auto; /* ADDED: This centers the content block */
+         }
         
-        .hero-banner-image {
-            width: 100%;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
+         .hero-banner-image {
+             width: 100%;
+             height: auto;
+             border-radius: 15px;
+             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+             margin-bottom: 2rem;
+         }
 
-        /* --- "Ask My Building" Search Bar --- */
-        .search-bar-container {
-            margin-top: 2rem;
-        }
+         /* --- "Ask My Building" Search Bar --- */
+         .search-bar-container {
+             margin-top: 2rem;
+         }
 
-        .search-bar {
-            background: var(--background-card);
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            padding: 1rem 1.5rem;
-            font-size: 1.1rem;
-            color: var(--text-light-gray);
-            text-align: left;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            margin-bottom: 1.5rem;
-        }
+         .search-bar {
+             background: var(--background-card);
+             border: 1px solid var(--border-light);
+             border-radius: 12px;
+             padding: 1rem 1.5rem;
+             font-size: 1.1rem;
+             color: var(--text-light-gray);
+             text-align: left;
+             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+             margin-bottom: 1.5rem;
+         }
 
-        .search-bar .cursor {
-            display: inline-block;
-            background-color: var(--text-dark);
-            width: 2px;
-            height: 1.2rem;
-            animation: blink 1s infinite;
-            vertical-align: middle;
-        }
+         .search-bar .cursor {
+             display: inline-block;
+             background-color: var(--text-dark);
+             width: 2px;
+             height: 1.2rem;
+             animation: blink 1s infinite;
+             vertical-align: middle;
+         }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
+         @keyframes blink {
+             0%, 100% { opacity: 1; }
+             50% { opacity: 0; }
+         }
 
-        .suggestion-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
+         .suggestion-buttons {
+             display: flex;
+             flex-direction: column;
+             gap: 1rem;
+         }
 
-        .suggestion-button {
-            background: var(--background-card);
-            border: 1px solid var(--border-light);
-            padding: 0.75rem 1.5rem;
-            border-radius: 10px;
-            text-align: center; 
-            font-weight: 500;
-            color: var(--text-light-gray);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+         .suggestion-button {
+             background: var(--background-card);
+             border: 1px solid var(--border-light);
+             padding: 0.75rem 1.5rem;
+             border-radius: 10px;
+             text-align: center;
+             font-weight: 500;
+             color: var(--text-light-gray);
+             cursor: pointer;
+             transition: all 0.3s ease;
+         }
 
-        .suggestion-button:hover {
-            border-color: var(--accent-cyan);
-            color: var(--text-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.07);
-        }
+         .suggestion-button:hover {
+             border-color: var(--accent-cyan);
+             color: var(--text-dark);
+             transform: translateY(-2px);
+             box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+         }
 
-        /* Section Styles */
-        .section {
-            padding: 5rem 0;
-            scroll-margin-top: 80px;
-        }
+         /* Section Styles */
+         .section {
+             padding: 5rem 0;
+             scroll-margin-top: 80px;
+         }
         
-        #about {
-            background: var(--background-light);
-        }
+         #about {
+             background: var(--background-light);
+         }
 
-        /* --- About Section Grid Layout --- */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr; /* Adjust column ratio as needed */
-            gap: 3rem;
-            align-items: center;
-        }
+         /* --- About Section Grid Layout --- */
+         .about-grid {
+             display: grid;
+             grid-template-columns: 1fr 1.5fr; /* Adjust column ratio as needed */
+             gap: 3rem;
+             align-items: center;
+         }
 
-        .about-left-column h2 {
-            font-family: var(--font-heading);
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem; /* Increased margin */
-        }
+         .about-left-column h2 {
+             font-family: var(--font-heading);
+             font-size: 2.5rem;
+             margin-bottom: 1.5rem; /* Increased margin */
+         }
         
-        .about-subheading {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            line-height: 1.4;
-            margin-bottom: 1rem;
-        }
+         .about-subheading {
+             font-size: 1.5rem;
+             font-weight: 600;
+             color: var(--text-dark);
+             line-height: 1.4;
+             margin-bottom: 1rem;
+         }
 
-        .about-left-column p {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: var(--text-light-gray);
-        }
+         .about-left-column p {
+             font-size: 1.1rem;
+             line-height: 1.7;
+             color: var(--text-light-gray);
+         }
 
-        .about-right-column {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
+         .about-right-column {
+             display: grid;
+             grid-template-columns: 1fr 1fr;
+             gap: 1.5rem;
+         }
 
-        .how-we-do-it-card {
-            background: var(--background-card);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 1px solid var(--border-light);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
+         .how-we-do-it-card {
+             background: var(--background-card);
+             padding: 1.5rem;
+             border-radius: 15px;
+             border: 1px solid var(--border-light);
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             text-align: center;
+         }
 
-        .how-we-do-it-icon {
-            width: 100px;
-            height: 100px;
-            background: var(--background-card);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
+         .how-we-do-it-icon {
+             width: 100px;
+             height: 100px;
+             background: var(--background-card);
+             border-radius: 50%;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             margin-bottom: 1rem;
+         }
         
-        .how-we-do-it-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
+         .how-we-do-it-icon img {
+             width: 100%;
+             height: 100%;
+             object-fit: contain;
+         }
 
-        .how-we-do-it-card h4 {
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-        }
+         .how-we-do-it-card h4 {
+             font-family: var(--font-heading);
+             font-size: 1rem;
+             margin-bottom: 0.5rem;
+         }
         
-        .full-width-banner {
-            padding: 0;
-            line-height: 0;
-            overflow: hidden; 
-        }
-        .full-width-banner img {
-            width: 100%;
-            display: block;
-        }
+         .full-width-banner {
+             padding: 0;
+             line-height: 0;
+             overflow: hidden; /* UPDATED: For Ken Burns effect */
+         }
+         .full-width-banner img {
+             width: 100%;
+             display: block;
+         }
 
-        .bordered-banner-image {
-            width: 100%;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            display: block;
-        }
-
-        .ken-burns {
-            animation: ken-burns 20s ease-in-out infinite alternate;
-        }
+         /* UPDATED: Ken Burns Effect */
+         .ken-burns {
+             animation: ken-burns 20s ease-in-out infinite alternate;
+         }
         
-        @keyframes ken-burns {
-            0% {
-                transform: scale(1) translate(0, 0);
-            }
-            100% {
-                transform: scale(1.1) translate(-2%, 2%);
-            }
-        }
+         @keyframes ken-burns {
+             0% {
+                 transform: scale(1) translate(0, 0);
+             }
+             100% {
+                 transform: scale(1.1) translate(-2%, 2%);
+             }
+         }
 
-        #services {
-            background: transparent; 
-            position: relative; 
-            z-index: 1;
-            overflow: hidden;
-        }
+         #services {
+             background: transparent;
+             position: relative;
+             z-index: 1;
+             overflow: hidden;
+         }
         
-        .services-background-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            opacity: 0.1; 
-        }
+         .services-background-image {
+             position: absolute;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             object-fit: cover;
+             z-index: -1;
+             opacity: 0.1;
+         }
 
-        .section-title {
-            text-align: center;
-            font-family: var(--font-heading);
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            color: var(--text-dark);
-        }
+         .section-title {
+             text-align: center;
+             font-family: var(--font-heading);
+             font-size: 2.5rem;
+             font-weight: 700;
+             margin-bottom: 3rem;
+             color: var(--text-dark);
+         }
 
-        /* Services Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
+         /* Services Grid */
+         .services-grid {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+             gap: 2rem;
+             margin-top: 2rem;
+         }
 
-        .service-card {
-            background: var(--background-card); 
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid var(--border-light);
-            cursor: pointer;
-        }
+         .service-card {
+             background: var(--background-card);
+             padding: 2rem;
+             border-radius: 15px;
+             text-align: center;
+             transition: all 0.3s ease;
+             border: 1px solid var(--border-light);
+             cursor: pointer;
+         }
 
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.07);
-            border-color: var(--accent-cyan);
-        }
+         .service-card:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 15px 30px rgba(0,0,0,0.07);
+             border-color: var(--accent-cyan);
+         }
 
-        .service-icon {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-        }
+         .service-icon {
+             width: 100px;
+             height: 100px;
+             border-radius: 50%;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             margin: 0 auto 1rem;
+         }
         
-        .service-icon img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-        }
+         .service-icon img {
+             width: 100%;
+             height: 100%;
+             border-radius: 50%;
+             object-fit: cover;
+         }
 
-        .service-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
+         .service-title {
+             font-size: 1.3rem;
+             font-weight: 600;
+             margin-bottom: 1rem;
+             color: var(--text-dark);
+         }
 
-        .service-description {
-            color: var(--text-light-gray);
-            line-height: 1.6;
-        }
+         .service-description {
+             color: var(--text-light-gray);
+             line-height: 1.6;
+         }
 
-        /* Demo Section */
-        .demo-section {
-            background: linear-gradient(135deg, var(--accent-cyan), #007B9E);
-            color: white;
-        }
+         /* Demo Section */
+         .demo-section {
+             background: linear-gradient(135deg, var(--accent-cyan), #007B9E);
+             color: white;
+         }
 
-        .demo-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            text-align: left;
-        }
+         .demo-grid {
+             display: grid;
+             grid-template-columns: 1fr 1fr;
+             gap: 3rem;
+             align-items: center;
+             text-align: left;
+         }
 
-        .demo-section .section-title, .demo-section p {
-            color: white;
-            text-align: left;
-        }
+         .demo-section .section-title, .demo-section p {
+             color: white;
+             text-align: left;
+         }
         
-        .demo-section p {
-            max-width: 450px;
-        }
+         .demo-section p {
+             max-width: 450px;
+         }
 
-        .demo-buttons-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1.5rem;
-        }
+         .demo-buttons-container {
+             display: flex;
+             flex-direction: column;
+             align-items: flex-start;
+             gap: 1.5rem;
+         }
 
-        .demo-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--accent-cyan);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            width: 100%;
-            max-width: 350px;
-            text-align: center;
-        }
+         .demo-button {
+             display: inline-block;
+             padding: 1rem 2rem;
+             background: rgba(255, 255, 255, 0.9);
+             color: var(--accent-cyan);
+             text-decoration: none;
+             border-radius: 50px;
+             font-weight: 600;
+             transition: all 0.3s ease;
+             border: none;
+             width: 100%;
+             max-width: 350px;
+             text-align: center;
+         }
 
-        .demo-button:hover {
-            transform: translateY(-2px) scale(1.02);
-            background: white;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
+         .demo-button:hover {
+             transform: translateY(-2px) scale(1.02);
+             background: white;
+             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+         }
 
-        /* Contact Section */
-        .contact {
-            padding: 5rem 0;
-            background: var(--background-card);
-        }
+         /* Contact Section */
+         .contact {
+             padding: 5rem 0;
+             background: var(--background-card);
+         }
 
-        .contact-content {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+         .contact-content {
+             text-align: center;
+             max-width: 600px;
+             margin: 0 auto;
+         }
 
-        .contact-form {
-            display: grid;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
+         .contact-form {
+             display: grid;
+             gap: 1rem;
+             margin-top: 2rem;
+         }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
+         .form-group {
+             display: flex;
+             flex-direction: column;
+         }
 
-        .form-group input,
-        .form-group textarea {
-            padding: 1rem;
-            border: 1px solid var(--border-light);
-            border-radius: 10px;
-            background: var(--background-light);
-            color: var(--text-dark);
-            transition: all 0.3s ease;
-            font-family: var(--font-body);
-        }
+         .form-group input,
+         .form-group textarea {
+             padding: 1rem;
+             border: 1px solid var(--border-light);
+             border-radius: 10px;
+             background: var(--background-light);
+             color: var(--text-dark);
+             transition: all 0.3s ease;
+             font-family: var(--font-body);
+         }
 
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: var(--text-light-gray);
-        }
+         .form-group input::placeholder,
+         .form-group textarea::placeholder {
+             color: var(--text-light-gray);
+         }
 
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-cyan);
-            background: var(--background-card);
-        }
+         .form-group input:focus,
+         .form-group textarea:focus {
+             outline: none;
+             border-color: var(--accent-cyan);
+             background: var(--background-card);
+         }
 
-        .submit-button {
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, var(--accent-cyan), #007B9E);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+         .submit-button {
+             padding: 1rem 2rem;
+             background: linear-gradient(135deg, var(--accent-cyan), #007B9E);
+             color: white;
+             border: none;
+             border-radius: 50px;
+             font-weight: 600;
+             cursor: pointer;
+             transition: all 0.3s ease;
+         }
 
-        .submit-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 169, 224, 0.3);
-        }
+         .submit-button:hover {
+             transform: translateY(-2px);
+             box-shadow: 0 10px 30px rgba(0, 169, 224, 0.3);
+         }
         
-        .main-logo-container {
-            padding: 4rem 0;
-            text-align: center;
-            background: var(--background-light);
-        }
+         .main-logo-container {
+             padding: 4rem 0;
+             text-align: center;
+             background: var(--background-light);
+         }
         
-        .main-logo-container img {
-            max-width: 120px;
-            height: auto;
-        }
+         .main-logo-container img {
+             max-width: 120px;
+             height: auto;
+         }
 
-        /* Footer */
-        footer {
-            background: #EAEAEA;
-            color: var(--text-light-gray);
-            text-align: center;
-            padding: 2rem 0;
-        }
+         /* Footer */
+         footer {
+             background: #EAEAEA;
+             color: var(--text-light-gray);
+             text-align: center;
+             padding: 2rem 0;
+         }
         
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.8);
-            backdrop-filter: blur(5px);
-        }
+         /* Modal Styles */
+         .modal {
+             display: none;
+             position: fixed;
+             z-index: 2000;
+             left: 0;
+             top: 0;
+             width: 100%;
+             height: 100%;
+             overflow: auto;
+             background-color: rgba(0,0,0,0.8);
+             backdrop-filter: blur(5px);
+         }
 
-        .modal-content {
-            position: relative;
-            margin: 5% auto;
-            padding: 0;
-            width: 90%;
-            max-width: 1100px;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-            animation-name: animatetop;
-            animation-duration: 0.4s;
-            background-color: #fefefe;
-        }
+         .modal-content {
+             position: relative;
+             margin: 5% auto;
+             padding: 0;
+             width: 90%;
+             max-width: 1100px;
+             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+             animation-name: animatetop;
+             animation-duration: 0.4s;
+             background-color: #fefefe;
+         }
         
-        .modal-body {
-            padding: 0;
-            height: 85vh;
-        }
+         .modal-body {
+             padding: 0;
+             height: 85vh;
+         }
         
-        .modal-body .sketchfab-embed-wrapper,
-        .modal-body iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+         .modal-body .sketchfab-embed-wrapper,
+         .modal-body iframe {
+             width: 100%;
+             height: 100%;
+             border: none;
+         }
 
-        @keyframes animatetop {
-            from {top: -300px; opacity: 0}
-            to {top: 0; opacity: 1}
-        }
+         @keyframes animatetop {
+             from {top: -300px; opacity: 0}
+             to {top: 0; opacity: 1}
+         }
 
-        .close {
-            color: white;
-            position: absolute;
-            top: 10px;
-            right: 25px;
-            font-size: 35px;
-            font-weight: bold;
-            transition: 0.3s;
-            z-index: 2001;
-        }
+         .close {
+             color: white;
+             position: absolute;
+             top: 10px;
+             right: 25px;
+             font-size: 35px;
+             font-weight: bold;
+             transition: 0.3s;
+             z-index: 2001;
+         }
 
-        .close:hover,
-        .close:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
+         .close:hover,
+         .close:focus {
+             color: #bbb;
+             text-decoration: none;
+             cursor: pointer;
+         }
         
-        .modal-citation {
-            padding: 10px 20px;
-            background-color: #f1f1f1;
-            font-size: 11px;
-            color: #888;
-            text-align: left;
-            line-height: 1.4;
-        }
-        .modal-citation a {
-            color: #555;
-            text-decoration: none;
-        }
-        .modal-citation a:hover {
-            text-decoration: underline;
-        }
+         .modal-citation {
+             padding: 10px 20px;
+             background-color: #f1f1f1;
+             font-size: 11px;
+             color: #888;
+             text-align: left;
+             line-height: 1.4;
+         }
+         .modal-citation a {
+             color: #555;
+             text-decoration: none;
+         }
+         .modal-citation a:hover {
+             text-decoration: underline;
+         }
 
 
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .about-grid, .demo-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .about-left-column {
-                margin-bottom: 3rem;
-            }
-            .demo-section .section-title, .demo-section p {
-                text-align: center;
-            }
-            .demo-buttons-container {
-                align-items: center;
-            }
-        }
+         /* Responsive Design */
+         @media (max-width: 992px) {
+             .about-grid, .demo-grid {
+                 grid-template-columns: 1fr;
+                 text-align: center;
+             }
+             .about-left-column {
+                 margin-bottom: 3rem;
+             }
+             .demo-section .section-title, .demo-section p {
+                 text-align: center;
+             }
+             .demo-buttons-container {
+                 align-items: center;
+             }
+         }
         
-        @media (max-width: 768px) {
-            .nav-container {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
-            }
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+         @media (max-width: 768px) {
+             .nav-container {
+                 flex-wrap: wrap;
+                 justify-content: center;
+                 gap: 1rem;
+             }
+             .nav-links {
+                 gap: 1rem;
+                 font-size: 0.9rem;
+             }
+             .hero-title {
+                 font-size: 2.5rem;
+             }
+             .services-grid {
+                 grid-template-columns: 1fr;
+             }
+         }
 
-        @media (max-width: 576px) {
-            .about-right-column {
-                grid-template-columns: 1fr;
-            }
-        }
+         @media (max-width: 576px) {
+             .about-right-column {
+                 grid-template-columns: 1fr;
+             }
+         }
 
-        /* UPDATED: Animations */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            transition-delay: var(--animation-delay, 0s);
-        }
+         /* UPDATED: Animations */
+         .animate-on-scroll {
+             opacity: 0;
+             transform: translateY(30px);
+             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+             transition-delay: var(--animation-delay, 0s);
+         }
 
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
-</head>
-<body>
-    <nav id="navbar">
-        <div class="container">
-            <div class="nav-container">
-                <a href="#hero" class="logo">
-                    <img src="assets/images/ttlogo.png" alt="TwinTech Small Logo">
-                    <span>twintech</span>
-                </a>
-                <ul class="nav-links">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#demo">Demo</a></li>
-                    <li><a href="#contact" class="cta-button">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+         .animate-on-scroll.visible {
+             opacity: 1;
+             transform: translateY(0);
+         }
+     </style>
+ </head>
+ <body>
+     <nav id="navbar">
+         <div class="container">
+             <div class="nav-container">
+                 <a href="#hero" class="logo">
+                     <img src="assets/images/ttlogo.png" alt="TwinTech Small Logo">
+                     <span>twintech</span>
+                 </a>
+                 <ul class="nav-links">
+                     <li><a href="#about">About</a></li>
+                     <li><a href="#services">Services</a></li>
+                     <li><a href="#demo">Demo</a></li>
+                     <li><a href="#contact" class="cta-button">Contact</a></li>
+                 </ul>
+             </div>
+         </div>
+     </nav>
 
-    <section class="hero" id="hero">
-        <div class="container">
-            <div class="hero-content animate-on-scroll">
-                <img src="assets/images/herbannew3.png" alt="Digital Twin Hero Banner" class="hero-banner-image">
-                <div class="search-bar-container">
-                    <div class="search-bar">
-                        <span id="search-placeholder"></span><span class="cursor">|</span>
-                    </div>
-                    <div class="suggestion-buttons">
-                        <div class="suggestion-button">Which products do I need to restock?</div>
-                        <div class="suggestion-button">Show me foot traffic on storey 3 for the last month.</div>
-                        <div class="suggestion-button">What is the current air quality in the ICU?</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+     <section class="hero" id="hero">
+         <div class="container">
+             <div class="hero-content animate-on-scroll">
+                 <img src="assets/images/herbannew3.png" alt="Digital Twin Hero Banner" class="hero-banner-image">
+                 <div class="search-bar-container">
+                     <div class="search-bar">
+                         <span id="search-placeholder"></span><span class="cursor">|</span>
+                     </div>
+                     <div class="suggestion-buttons">
+                         <div class="suggestion-button">Which products do I need to restock?</div>
+                         <div class="suggestion-button">Show me foot traffic on storey 3 for the last month.</div>
+                         <div class="suggestion-button">What is the current air quality in the ICU?</div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </section>
     
-    <section class="section" id="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-left-column animate-on-scroll" style="--animation-delay: 0.1s;">
-                    <h2>We are twintech.</h2>
-                    <p class="about-subheading">We meet you wherever you are to get your business twin-ready.</p>
-                    <p>We connect the dots between physical and digital systems, unlocking the full value of your building.</p>
-                </div>
-                <div class="about-right-column">
-                    <div class="how-we-do-it-card animate-on-scroll" style="--animation-delay: 0.2s;">
-                        <div class="how-we-do-it-icon">
-                            <img src="assets/images/icon-procurement.png" alt="Smart Procurement Icon">
-                        </div>
-                        <h4>SMART PROCUREMENT</h4>
-                        <p class="service-description">Equipment specification and procurement ensures compatibility across systems.</p>
-                    </div>
-                    <div class="how-we-do-it-card animate-on-scroll" style="--animation-delay: 0.3s;">
-                        <div class="how-we-do-it-icon">
-                            <img src="assets/images/icon-consulting.png" alt="Readiness Consulting Icon">
-                        </div>
-                        <h4>READINESS CONSULTING</h4>
-                        <p class="service-description">Preparing infrastructure for digital twin implementation.</p>
-                    </div>
-                    <div class="how-we-do-it-card animate-on-scroll" style="--animation-delay: 0.4s;">
-                        <div class="how-we-do-it-icon">
-                            <img src="assets/images/icon-unification.png" alt="Data Unification Icon">
-                        </div>
-                        <h4>DATA UNIFICATION</h4>
-                        <p class="service-description">Transforming fragmented systems into unified dashboards.</p>
-                    </div>
-                    <div class="how-we-do-it-card animate-on-scroll" style="--animation-delay: 0.5s;">
-                        <div class="how-we-do-it-icon">
-                            <img src="assets/images/icon-maintenance.png" alt="Augmented Maintenance Icon">
-                        </div>
-                        <h4>DIGITALLY AUGMENTED MAINTENANCE</h4>
-                        <p class="service-description">More data leads to better insights and improved decision-making over time.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+     <section class="section" id="about">
+         <div class="container">
+             <div class="about-grid">
+                 <div class="about-left-column animate-on-scroll" style="--animation-delay: 0.1s;">
+                     <h2>We are twintech.</h2>
+                     <p class="about-subheading">We meet you wherever you are to get your business twin-ready.</p>
+                     <p>We connect the dots between physical and digital systems, unlocking the full value of your building.</p>
+                 </div>
+                 <div class="about-right-column">
+                     <div class="how-we-do-it-card animate-on-scroll" style="--animation-delay: 0.2s;">
+                         <div class="how-we-do-it-icon">
+                             <img src="assets/images/icon-procurement.png" alt="Smart Procurement Icon">
+                         </div>
+                         <h4>SMART PROCUREMENT</h4>
+                         <p class="service-description">Equipment specification and procurement ensures compatibility across systems.</p>
+                     </div>
+                     <div class="how-we-do-it-card animate-on-scroll" style="--animation-delay: 0.3s;">
+                         <div class="how-we-do-it-icon">
+                             <img src="assets/images/icon-consulting.png" alt="Readiness Consulting Icon">
+                         </div>
+                         <h4>READINESS CONSULTING</h4>
+                         <p class="service-description">Preparing infrastructure for digital twin implementation.</p>
+                     </div>
+                     <div class="how-we-do-it-card animate-on-scroll" style="--animation-delay: 0.4s;">
+                         <div class="how-we-do-it-icon">
+                             <img src="assets/images/icon-unification.png" alt="Data Unification Icon">
+                         </div>
+                         <h4>DATA UNIFICATION</h4>
+                         <p class="service-description">Transforming fragmented systems into unified dashboards.</p>
+                     </div>
+                     <div class="how-we-do-it-card animate-on-scroll" style="--animation-delay: 0.5s;">
+                         <div class="how-we-do-it-icon">
+                             <img src="assets/images/icon-maintenance.png" alt="Augmented Maintenance Icon">
+                         </div>
+                         <h4>DIGITALLY AUGMENTED MAINTENANCE</h4>
+                         <p class="service-description">More data leads to better insights and improved decision-making over time.</p>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </section>
 
-    <section class="section">
-        <div class="container">
-            <div class="hero-content animate-on-scroll">
-                <img src="assets/images/heromiddle1.png" alt="Digital Twin Technology Banner" class="hero-banner-image">
-            </div>
-        </div>
-    </section>
+     <section class="section">
+         <div class="container">
+             <div class="hero-content animate-on-scroll">
+                 <img src="assets/images/heromiddle1.png" alt="Digital Twin Technology Banner" class="hero-banner-image">
+             </div>
+         </div>
+     </section>
 
-    <section class="section" id="services">
-        <img src="assets/images/herobannerlower1.png" alt="Digital Twin Technology Banner" class="services-background-image">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">How we guide your digital twin journey</h2>
-            <div class="services-grid">
-                <div class="service-card animate-on-scroll" style="--animation-delay: 0.2s;">
-                    <div class="service-icon">
-                        <img src="assets/images/iconprocure.png" alt="Specification & Procurement Icon">
-                    </div>
-                    <h3 class="service-title">Specification & Procurement</h3>
-                    <p class="service-description">Guide equipment selection for generators, chillers, and mechanical systems, ensuring REST API compatibility and smart meter integration.</p>
-                </div>
-                <div class="service-card animate-on-scroll" style="--animation-delay: 0.3s;">
-                    <div class="service-icon">
-                        <img src="assets/images/iconstream.png" alt="Birds-eye View Icon">
-                    </div>
-                    <h3 class="service-title">Birds-eye view in your pocket</h3>
-                    <p class="service-description">Pull all your data streams together into easy-to-use dashboards for insights on the go.</p>
-                </div>
-                <div class="service-card animate-on-scroll" style="--animation-delay: 0.4s;">
-                    <div class="service-icon">
-                        <img src="assets/images/iconbim.png" alt="BIM Data Icon">
-                    </div>
-                    <h3 class="service-title">Already have BIM data?</h3>
-                    <p class="service-description">We use your existing data streams to create your digital dollhouse: a virtual twin that co-evolves with your building.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+     <section class="section" id="services">
+         <img src="assets/images/herobannerlower1.png" alt="Digital Twin Technology Banner" class="services-background-image">
+         <div class="container">
+             <h2 class="section-title animate-on-scroll">How we guide your digital twin journey</h2>
+             <div class="services-grid">
+                 <div class="service-card animate-on-scroll" style="--animation-delay: 0.2s;">
+                     <div class="service-icon">
+                         <img src="assets/images/iconprocure.png" alt="Specification & Procurement Icon">
+                     </div>
+                     <h3 class="service-title">Specification & Procurement</h3>
+                     <p class="service-description">Guide equipment selection for generators, chillers, and mechanical systems, ensuring REST API compatibility and smart meter integration.</p>
+                 </div>
+                 <div class="service-card animate-on-scroll" style="--animation-delay: 0.3s;">
+                     <div class="service-icon">
+                         <img src="assets/images/iconstream.png" alt="Birds-eye View Icon">
+                     </div>
+                     <h3 class="service-title">Birds-eye view in your pocket</h3>
+                     <p class="service-description">Pull all your data streams together into easy-to-use dashboards for insights on the go.</p>
+                 </div>
+                 <div class="service-card animate-on-scroll" style="--animation-delay: 0.4s;">
+                     <div class="service-icon">
+                         <img src="assets/images/iconbim.png" alt="BIM Data Icon">
+                     </div>
+                     <h3 class="service-title">Already have BIM data?</h3>
+                     <p class="service-description">We use your existing data streams to create your digital dollhouse: a virtual twin that co-evolves with your building.</p>
+                 </div>
+             </div>
+         </div>
+     </section>
 
-    <section class="section demo-section" id="demo">
-        <div class="container">
-            <div class="demo-grid">
-                <div class="demo-left-column">
-                    <h2 class="section-title">A Glimpse into Virtualisation</h2>
-                    <p>These interactive models demonstrates the feel of navigating a virtual space. Our full digital twin solutions go much further, integrating real-time data to power everything from immersive online shopping experiences to advanced medical training simulations.</p>
-                </div>
-                <div class="demo-buttons-container">
-                    <a href="#" class="demo-button" id="launchDemoBtn1">Demo 1 - Medical</a>
-                    <a href="#" class="demo-button" id="launchDemoBtn2">Demo 2 - Boutique Retail</a>
-                    <a href="#" class="demo-button" id="launchDemoBtn3">Demo 3 - Infrastructure</a>
-                </div>
-            </div>
-        </div>
-    </section>
+     <section class="section demo-section" id="demo">
+         <div class="container">
+             <div class="demo-grid">
+                 <div class="demo-left-column">
+                     <h2 class="section-title">A Glimpse into Virtualisation - Digital Twin Demos</h2>
+                     <p>These interactive models demonstrates the feel of navigating a virtual space. Our full digital twin solutions go much further, integrating real-time data to power everything from immersive online shopping experiences to advanced medical training simulations.</p>
+                 </div>
+                 <div class="demo-buttons-container">
+                     <a href="#" class="demo-button" id="launchDemoBtn4">Arctic Ape - pod 1</a>
+                     <a href="#" class="demo-button" id="launchDemoBtn5">Arctic Ape - pod 2</a>
+                     <a href="#" class="demo-button" id="launchDemoBtn1">Medical</a>
+                     <a href="#" class="demo-button" id="launchDemoBtn2">Boutique Retail</a>
+                     <a href="#" class="demo-button" id="launchDemoBtn3">Infrastructure</a>
+                 </div>
+             </div>
+         </div>
+     </section>
 
-    <section class="section" id="more-solutions">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">Twinning is winning!</h2>
-            <div class="hero-content animate-on-scroll" style="--animation-delay: 0.2s;">
-                <img src="assets/images/heromore2.png" alt="Advanced Digital Twin Application 1" class="hero-banner-image ken-burns">
-            </div>
-                 <h2 class="section-title animate-on-scroll" style="margin-top: 4rem;">Simulate. Analyse. Optimise.</h2>
-            <div class="hero-content animate-on-scroll" style="--animation-delay: 0.4s;">
-                <img src="assets/images/heromore1.png" alt="Advanced Digital Twin Application 2" class="hero-banner-image ken-burns">
-            </div>
-        </div>
-    </section>
+     <section class="section" id="more-solutions">
+         <div class="container">
+             <h2 class="section-title animate-on-scroll">Twinning is winning!</h2>
+             <div class="hero-content animate-on-scroll" style="--animation-delay: 0.2s;">
+                 <img src="assets/images/heromore2.png" alt="Advanced Digital Twin Application 1" class="hero-banner-image ken-burns">
+             </div>
+                   <h2 class="section-title animate-on-scroll" style="margin-top: 4rem;">Simulate. Analyse. Optimise.</h2>
+             <div class="hero-content animate-on-scroll" style="--animation-delay: 0.4s;">
+                 <img src="assets/images/heromore1.png" alt="Advanced Digital Twin Application 2" class="hero-banner-image ken-burns">
+             </div>
+         </div>
+     </section>
 
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="contact-content">
-                <h2 class="section-title">Let's connect</h2>
-                <p class="hero-subtitle">Invest now in your digital future and join us in a shared commitment to build smarter with data. Get in touch via the form below, and let's link up.</p>
-                <form class="contact-form" action="https://formspree.io/f/xrbkvnaq" method="POST">
-                    <div class="form-group">
-                        <input type="text" name="name" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" name="email" placeholder="Email Address" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="company" placeholder="Company/Organisation">
-                    </div>
-                    <div class="form-group">
-                        <textarea name="message" rows="5" placeholder="Tell us about your project requirements..." required></textarea>
-                    </div>
-                    <button type="submit" class="submit-button">Let's twin!</button>
-                </form>
-            </div>
-        </div>
-    </section>
+     <section class="contact" id="contact">
+         <div class="container">
+             <div class="contact-content">
+                 <h2 class="section-title">Let's connect</h2>
+                 <p class="hero-subtitle">Invest now in your digital future and join us in a shared commitment to build smarter with data. Get in touch via the form below, and let's link up.</p>
+                 <form class="contact-form" action="https://formspree.io/f/xrbkvnaq" method="POST">
+                     <div class="form-group">
+                         <input type="text" name="name" placeholder="Your Name" required>
+                     </div>
+                     <div class="form-group">
+                         <input type="email" name="email" placeholder="Email Address" required>
+                     </div>
+                     <div class="form-group">
+                         <input type="text" name="company" placeholder="Company/Organisation">
+                     </div>
+                     <div class="form-group">
+                         <textarea name="message" rows="5" placeholder="Tell us about your project requirements..." required></textarea>
+                     </div>
+                     <button type="submit" class="submit-button">Let's twin!</button>
+                 </form>
+             </div>
+         </div>
+     </section>
 
-    <section class="main-logo-container">
-        <img src="assets/images/logosmalltrans.png" alt="TwinTech Main Logo">
-    </section>
+     <section class="main-logo-container">
+         <img src="assets/images/logosmalltrans.png" alt="TwinTech Main Logo">
+     </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 twintech. Build smarter with data and digital twins.</p>
-        </div>
-    </footer>
+     <footer>
+         <div class="container">
+             <p>&copy; 2025 twintech. Build smarter with data and digital twins.</p>
+         </div>
+     </footer>
     
-    <div id="demoModal1" class="modal">
-      <div class="modal-content">
-        <span class="close" data-modal-id="demoModal1">&times;</span>
-        <div class="modal-body">
-          <div class="sketchfab-embed-wrapper"> <iframe title="Charité University Hospital - Operating Room" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/9ec46c4d615a4581a235eebfb162f574/embed"> </iframe> </div>
-        </div>
-        <div class="modal-citation">
-            <p>Demo model: <a href="https://sketchfab.com/3d-models/charite-university-hospital-operating-room-9ec46c4d615a4581a235eebfb162f574?utm_medium=embed&utm_campaign=share-popup&utm_content=9ec46c4d615a4581a235eebfb162f574" target="_blank" rel="nofollow">"Charité University Hospital - Operating Room"</a> by ChrisRE on Sketchfab. The underlying research for this model is cited as: Queisner M, Pogorzhelskiy M, Remde C, Pratschke J, Sauer IM. VolumetricOR: A New Approach to Simulate Surgical Interventions in Virtual Reality for Training and Education. Surg Innov. 2022 Jun;29(3):406-415. doi: 10.1177/15533506211054240. Epub 2022 Feb 9. PMID: 35137646; PMCID: PMC9438748. <a href="https://pubmed.ncbi.nlm.nih.gov/35137646/" target="_blank" rel="nofollow">View Publication</a>.</p>
-        </div>
-      </div>
-    </div>
+     <div id="demoModal4" class="modal">
+       <div class="modal-content">
+         <span class="close" data-modal-id="demoModal4">&times;</span>
+         <div class="modal-body">
+           <iframe src="https://my.matterport.com/show/?m=VWPvGUkbGrS" allowfullscreen></iframe>
+         </div>
+         <div class="modal-citation">
+           <p>This 3D model is a demonstration and is not the property or part of the work portfolio of TwinTech. It belongs to its respective owner.</p>
+         </div>
+       </div>
+     </div>
 
-    <div id="demoModal2" class="modal">
-      <div class="modal-content">
-        <span class="close" data-modal-id="demoModal2">&times;</span>
-        <div class="modal-body">
-          <iframe src="https://vr.spinview.io/cafefactory/?s=pano63474" allowfullscreen></iframe>
-        </div>
-        <div class="modal-citation">
-            <p>This 3D model is a demonstration and is not the property or part of the work portfolio of TwinTech. It belongs to its respective owner.</p>
-        </div>
-      </div>
-    </div>
+     <div id="demoModal5" class="modal">
+       <div class="modal-content">
+         <span class="close" data-modal-id="demoModal5">&times;</span>
+         <div class="modal-body">
+           <iframe src="https://my.matterport.com/show/?m=FMY6qRZmCeu" allowfullscreen></iframe>
+         </div>
+         <div class="modal-citation">
+           <p>This 3D model is a demonstration and is not the property or part of the work portfolio of TwinTech. It belongs to its respective owner.</p>
+         </div>
+       </div>
+     </div>
 
-    <div id="demoModal3" class="modal">
-      <div class="modal-content">
-        <span class="close" data-modal-id="demoModal3">&times;</span>
-        <div class="modal-body">
-          <iframe src="https://my.matterport.com/show/?m=mHeaDfTYcMR" allowfullscreen></iframe>
-        </div>
-        <div class="modal-citation">
-            <p>This 3D model is a demonstration and is not the property or part of the work portfolio of TwinTech. It belongs to its respective owner.</p>
-        </div>
-      </div>
-    </div>
+     <div id="demoModal1" class="modal">
+       <div class="modal-content">
+         <span class="close" data-modal-id="demoModal1">&times;</span>
+         <div class="modal-body">
+           <div class="sketchfab-embed-wrapper"> <iframe title="Charité University Hospital - Operating Room" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/9ec46c4d615a4581a235eebfb162f574/embed"> </iframe> </div>
+         </div>
+         <div class="modal-citation">
+           <p>Demo model: <a href="https://sketchfab.com/3d-models/charite-university-hospital-operating-room-9ec46c4d615a4581a235eebfb162f574?utm_medium=embed&utm_campaign=share-popup&utm_content=9ec46c4d615a4581a235eebfb162f574" target="_blank" rel="nofollow">"Charité University Hospital - Operating Room"</a> by ChrisRE on Sketchfab. The underlying research for this model is cited as: Queisner M, Pogorzhelskiy M, Remde C, Pratschke J, Sauer IM. VolumetricOR: A New Approach to Simulate Surgical Interventions in Virtual Reality for Training and Education. Surg Innov. 2022 Jun;29(3):406-415. doi: 10.1177/15533506211054240. Epub 2022 Feb 9. PMID: 35137646; PMCID: PMC9438748. <a href="https://pubmed.ncbi.nlm.nih.gov/35137646/" target="_blank" rel="nofollow">View Publication</a>.</p>
+         </div>
+       </div>
+     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- Typing Animation for Search Bar ---
-            const placeholder = document.getElementById('search-placeholder');
-            const questions = [
-                "Predict next month's electricity cost, based on weather forecasts. Include an alaysis of historical data about how weather affetcs our energy consumption in this building.", 
-                "Show me foot traffic on storey 3 for the last month...",
-                "Based on this year's patron numbers, recommend optimal staffing levels for Saturday afternoon.",
-                "Are there any energy usage anomalies?",
-                "Simulate a power outage on the underground parking level...",
-                "What would be the impact on checkout queue times if we achieve a 20% increase in foot traffic in the shop?"
-            ];
-            let questionIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
+     <div id="demoModal2" class="modal">
+       <div class="modal-content">
+         <span class="close" data-modal-id="demoModal2">&times;</span>
+         <div class="modal-body">
+           <iframe src="https://vr.spinview.io/cafefactory/?s=pano63474" allowfullscreen></iframe>
+         </div>
+         <div class="modal-citation">
+           <p>This 3D model is a demonstration and is not the property or part of the work portfolio of TwinTech. It belongs to its respective owner.</p>
+         </div>
+       </div>
+     </div>
 
-            function type() {
-                const currentQuestion = questions[questionIndex];
-                if (isDeleting) {
-                    placeholder.textContent = currentQuestion.substring(0, charIndex--);
-                } else {
-                    placeholder.textContent = currentQuestion.substring(0, charIndex++);
-                }
+     <div id="demoModal3" class="modal">
+       <div class="modal-content">
+         <span class="close" data-modal-id="demoModal3">&times;</span>
+         <div class="modal-body">
+           <iframe src="https://my.matterport.com/show/?m=mHeaDfTYcMR" allowfullscreen></iframe>
+         </div>
+         <div class="modal-citation">
+           <p>This 3D model is a demonstration and is not the property or part of the work portfolio of TwinTech. It belongs to its respective owner.</p>
+         </div>
+       </div>
+     </div>
 
-                let typeSpeed = isDeleting ? 50 : 150;
+     <script>
+         document.addEventListener('DOMContentLoaded', function() {
+             // --- Typing Animation for Search Bar ---
+             const placeholder = document.getElementById('search-placeholder');
+             const questions = [
+                 "Predict next month's electricity cost, based on weather forecasts. Include an alaysis of historical data about how weather affetcs our energy consumption in this building.",
+                 "Show me foot traffic on storey 3 for the last month...",
+                 "Based on this year's patron numbers, recommend optimal staffing levels for Saturday afternoon.",
+                 "Are there any energy usage anomalies?",
+                 "Simulate a power outage on the underground parking level...",
+                 "What would be the impact on checkout queue times if we achieve a 20% increase in foot traffic in the shop?"
+             ];
+             let questionIndex = 0;
+             let charIndex = 0;
+             let isDeleting = false;
 
-                if (!isDeleting && charIndex === currentQuestion.length) {
-                    typeSpeed = 2000; // Pause at the end
-                    isDeleting = true;
-                } else if (isDeleting && charIndex === 0) {
-                    isDeleting = false;
-                    questionIndex = (questionIndex + 1) % questions.length;
-                    typeSpeed = 500; // Pause before typing next
-                }
+             function type() {
+                 const currentQuestion = questions[questionIndex];
+                 if (isDeleting) {
+                     placeholder.textContent = currentQuestion.substring(0, charIndex--);
+                 } else {
+                     placeholder.textContent = currentQuestion.substring(0, charIndex++);
+                 }
 
-                setTimeout(type, typeSpeed);
-            }
-            type();
+                 let typeSpeed = isDeleting ? 50 : 150;
+
+                 if (!isDeleting && charIndex === currentQuestion.length) {
+                     typeSpeed = 2000; // Pause at the end
+                     isDeleting = true;
+                 } else if (isDeleting && charIndex === 0) {
+                     isDeleting = false;
+                     questionIndex = (questionIndex + 1) % questions.length;
+                     typeSpeed = 500; // Pause before typing next
+                 }
+
+                 setTimeout(type, typeSpeed);
+             }
+             type();
 
 
-            // --- Smooth Scrolling ---
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
+             // --- Smooth Scrolling ---
+             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                 anchor.addEventListener('click', function (e) {
+                     e.preventDefault();
+                     const targetId = this.getAttribute('href');
+                     const targetElement = document.querySelector(targetId);
+                     if (targetElement) {
+                         targetElement.scrollIntoView({
+                             behavior: 'smooth',
+                             block: 'start'
+                         });
+                     }
+                 });
+             });
 
-            // --- Navbar Scroll Effect ---
-            const navbar = document.getElementById('navbar');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-            });
+             // --- Navbar Scroll Effect ---
+             const navbar = document.getElementById('navbar');
+             window.addEventListener('scroll', () => {
+                 if (window.scrollY > 50) {
+                     navbar.classList.add('scrolled');
+                 } else {
+                     navbar.classList.remove('scrolled');
+                 }
+             });
 
-            // --- UPDATED: Section Scroll Animations ---
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
+             // --- UPDATED: Section Scroll Animations ---
+             const observerOptions = {
+                 threshold: 0.1,
+                 rootMargin: '0px 0px -50px 0px'
+             };
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, observerOptions);
+             const observer = new IntersectionObserver((entries) => {
+                 entries.forEach(entry => {
+                     if (entry.isIntersecting) {
+                         entry.target.classList.add('visible');
+                     }
+                 });
+             }, observerOptions);
 
-            document.querySelectorAll('.animate-on-scroll').forEach(el => {
-                observer.observe(el);
-            });
+             document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                 observer.observe(el);
+             });
             
-            // --- Demo Modal Logic for Multiple Modals ---
-            const modals = document.querySelectorAll('.modal');
+             // --- Demo Modal Logic for Multiple Modals ---
+             const modals = document.querySelectorAll('.modal');
             
-            function openModal(modalId) {
-                const modal = document.getElementById(modalId);
-                if(modal) modal.style.display = "block";
-            }
+             function openModal(modalId) {
+                 const modal = document.getElementById(modalId);
+                 if(modal) modal.style.display = "block";
+             }
 
-            function closeModal(modalId) {
-                const modal = document.getElementById(modalId);
-                if(modal) modal.style.display = "none";
-            }
+             function closeModal(modalId) {
+                 const modal = document.getElementById(modalId);
+                 if(modal) modal.style.display = "none";
+             }
 
-            document.getElementById("launchDemoBtn1").onclick = (e) => { e.preventDefault(); openModal('demoModal1'); };
-            document.getElementById("launchDemoBtn2").onclick = (e) => { e.preventDefault(); openModal('demoModal2'); };
-            document.getElementById("launchDemoBtn3").onclick = (e) => { e.preventDefault(); openModal('demoModal3'); };
+             document.getElementById("launchDemoBtn1").onclick = (e) => { e.preventDefault(); openModal('demoModal1'); };
+             document.getElementById("launchDemoBtn2").onclick = (e) => { e.preventDefault(); openModal('demoModal2'); };
+             document.getElementById("launchDemoBtn3").onclick = (e) => { e.preventDefault(); openModal('demoModal3'); };
+             // UPDATED: Added listeners for new demo buttons
+             document.getElementById("launchDemoBtn4").onclick = (e) => { e.preventDefault(); openModal('demoModal4'); };
+             document.getElementById("launchDemoBtn5").onclick = (e) => { e.preventDefault(); openModal('demoModal5'); };
 
-            document.querySelectorAll('.close').forEach(closeBtn => {
-                closeBtn.onclick = () => {
-                    closeModal(closeBtn.getAttribute('data-modal-id'));
-                };
-            });
+             document.querySelectorAll('.close').forEach(closeBtn => {
+                 closeBtn.onclick = () => {
+                     closeModal(closeBtn.getAttribute('data-modal-id'));
+                 };
+             });
 
-            window.onclick = function(event) {
-                modals.forEach(modal => {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
-                    }
-                });
-            }
+             window.onclick = function(event) {
+                 modals.forEach(modal => {
+                     if (event.target == modal) {
+                         modal.style.display = "none";
+                     }
+                 });
+             }
 
-        });
-    </script>
-</body>
-</html>
+         });
+     </script>
+ </body>
+ </html>

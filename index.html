@@ -82,6 +82,8 @@
         /* Sections */
         .section { padding: 5rem 0; scroll-margin-top: 80px; }
         #about { background: var(--background-light); }
+        /* NEW: tighten space above ABOUT */
+        #about { padding-top: 3rem; }
 
         /* About grid */
         .about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: center; }
@@ -104,8 +106,14 @@
         .services-background-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: 0.1; }
         .section-title { text-align: center; font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; margin-bottom: 3rem; color: var(--text-dark); }
 
+        /* NEW: subtle intro under Services heading */
+        .section-intro { text-align: center; color: var(--text-light-gray); max-width: 980px; margin: -1.25rem auto 0; }
+
         /* Services Grid */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        /* NEW: extra space between top row (PDF) and static row */
+        .services-grid.top-row { margin-bottom: 3rem; }
+
         .service-card { background: var(--background-card); padding: 2rem; border-radius: 15px; text-align: center; transition: all .3s ease; border: 1px solid var(--border-light); cursor: pointer; }
         .service-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.07); border-color: var(--accent-cyan); }
         .service-icon { width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
@@ -116,7 +124,11 @@
         /* Make entire service card a link (for the 3 PDF cards) */
         a.service-card { display: block; text-decoration: none; color: inherit; }
 
-        /* Contact */
+        /* NEW: non-interactive style for static cards */
+        .service-card.is-static { cursor: default; }
+        .service-card.is-static:hover { transform: none; box-shadow: none; border-color: var(--border-light); }
+
+        /* Contact / Demo */
         .demo-section { background: linear-gradient(135deg, var(--accent-cyan), #007B9E); color: #fff; }
         .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; text-align: left; }
         .demo-section .section-title, .demo-section p { color: #fff; text-align: left; }
@@ -275,8 +287,13 @@
         <div class="container">
             <h2 class="section-title animate-on-scroll">How we guide your digital twin journey</h2>
 
-            <!-- NEW: Three PDF cards ABOVE the current services cards -->
-            <div class="services-grid animate-on-scroll" style="--animation-delay: 0.1s;">
+            <!-- NEW: explanatory sentence under heading -->
+            <p class="section-intro animate-on-scroll" style="--animation-delay: 0.05s;">
+                Our core offerings are 3-pronged: Data engineering consultancy services; Commercial and cosmetic digital twins for the likes of boutique stores, museums and galleries, and 'infrastructure twins' for medical facilities and other mission-critical spaces with a complex array of data streams and interconnecting systems. Explore our solutions via the downloadable presentations below
+            </p>
+
+            <!-- Top row: PDF cards (downloadable pitch decks) -->
+            <div class="services-grid top-row animate-on-scroll" style="--animation-delay: 0.1s;">
                 <a class="service-card" href="assets/pdfs/twintech%20-%20Data%20Engineering%20Service-11-aug-2025.pdf" target="_blank" rel="noopener">
                     <div class="service-icon">
                         <img src="assets/images/dataeng.png" alt="Data engineering consulting PDF">
@@ -302,23 +319,23 @@
                 </a>
             </div>
 
-            <!-- Existing service cards (unchanged) -->
+            <!-- Bottom row: static cards (NOT interactive) -->
             <div class="services-grid">
-                <div class="service-card animate-on-scroll" style="--animation-delay: 0.2s;">
+                <div class="service-card is-static animate-on-scroll" style="--animation-delay: 0.2s;">
                     <div class="service-icon">
                         <img src="assets/images/iconprocure.png" alt="Specification & Procurement Icon">
                     </div>
                     <h3 class="service-title">Specification & Procurement</h3>
                     <p class="service-description">Guide equipment selection for generators, chillers, and mechanical systems, ensuring REST API compatibility and smart meter integration.</p>
                 </div>
-                <div class="service-card animate-on-scroll" style="--animation-delay: 0.3s;">
+                <div class="service-card is-static animate-on-scroll" style="--animation-delay: 0.3s;">
                     <div class="service-icon">
                         <img src="assets/images/iconstream.png" alt="Birds-eye View Icon">
                     </div>
                     <h3 class="service-title">Birds-eye view in your pocket</h3>
                     <p class="service-description">Pull all your data streams together into easy-to-use dashboards for insights on the go.</p>
                 </div>
-                <div class="service-card animate-on-scroll" style="--animation-delay: 0.4s;">
+                <div class="service-card is-static animate-on-scroll" style="--animation-delay: 0.4s;">
                     <div class="service-icon">
                         <img src="assets/images/iconbim.png" alt="BIM Data Icon">
                     </div>
@@ -327,9 +344,9 @@
                 </div>
             </div>
 
-            <!-- UPDATED: Standalone "Your data is secure" block using EXACT copy -->
+            <!-- Secure data block: static, not interactive -->
             <div class="data-secure-wrapper">
-                <div class="service-card animate-on-scroll" style="--animation-delay: 0.5s;">
+                <div class="service-card is-static animate-on-scroll" style="--animation-delay: 0.5s;">
                     <div class="service-icon">
                         <img src="assets/images/shield.png" alt="Your data is secure">
                     </div>

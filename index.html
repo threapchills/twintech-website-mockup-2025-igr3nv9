@@ -23,11 +23,7 @@
             --font-body: 'Inter', sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: var(--font-body);
@@ -37,662 +33,155 @@
             overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
         /* --- Navigation --- */
         nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
+            position: fixed; top: 0; width: 100%;
             background: rgba(249, 249, 249, 0.8);
             backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
+            z-index: 1000; padding: 1rem 0;
             transition: all 0.3s ease;
             border-bottom: 1px solid var(--border-light);
         }
+        nav.scrolled { background: rgba(255,255,255,0.95); box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
 
-        nav.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
+        .logo { display: flex; align-items: center; gap: .75rem; font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; color: var(--accent-cyan); text-decoration: none; letter-spacing: -0.5px; }
+        .logo img { height: 40px; }
 
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--accent-cyan);
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
-       
-        .logo img {
-            height: 40px;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-cyan);
-        }
-       
-        .nav-links .cta-button {
-            background-color: var(--accent-cyan);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-        }
-       
-        .nav-links .cta-button:hover {
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 169, 224, 0.4);
-        }
+        .nav-links { display: flex; align-items: center; list-style: none; gap: 2rem; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 500; transition: color .3s ease; position: relative; }
+        .nav-links a:hover { color: var(--accent-cyan); }
+        .nav-links .cta-button { background-color: var(--accent-cyan); color: #fff; padding: .5rem 1rem; border-radius: 50px; transition: all .3s ease; }
+        .nav-links .cta-button:hover { color: #fff; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,169,224,.4); }
 
         /* --- Hero Section --- */
-        .hero {
-            padding-top: 120px; /* Increased padding for nav */
-            min-height: 100vh;
-            display: flex;
-            align-items: flex-start; /* Align content to the top */
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            background: var(--background-light);
-        }
-
-        .hero-content {
-            text-align: center;
-            color: var(--text-dark);
-            z-index: 10;
-            position: relative;
-            width: 100%;
-            max-width: 900px; /* Control max width of hero content */
-            margin: 0 auto; /* ADDED: This centers the content block */
-        }
-       
-        .hero-banner-image {
-            width: 100%;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
+        .hero { padding-top: 120px; min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; position: relative; overflow: hidden; background: var(--background-light); }
+        .hero-content { text-align: center; color: var(--text-dark); z-index: 10; position: relative; width: 100%; max-width: 900px; margin: 0 auto; }
+        .hero-banner-image { width: 100%; height: auto; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); margin-bottom: 2rem; }
 
         /* --- "Ask My Building" Search Bar --- */
-        .search-bar-container {
-            margin-top: 2rem;
-        }
-
+        .search-bar-container { margin-top: 2rem; }
         .search-bar {
-            background: var(--background-card);
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            padding: 1rem 1.5rem;
-            font-size: 1.1rem;
-            color: var(--text-light-gray);
-            text-align: left;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            margin-bottom: 1.5rem;
+            background: var(--background-card); border: 1px solid var(--border-light); border-radius: 12px;
+            padding: 1rem 1.5rem; font-size: 1.1rem; color: var(--text-light-gray); text-align: left;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 1.5rem;
         }
+        .search-bar .cursor { display: inline-block; background-color: var(--text-dark); width: 2px; height: 1.2rem; animation: blink 1s infinite; vertical-align: middle; }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-        .search-bar .cursor {
-            display: inline-block;
-            background-color: var(--text-dark);
-            width: 2px;
-            height: 1.2rem;
-            animation: blink 1s infinite;
-            vertical-align: middle;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        .suggestion-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
+        .suggestion-buttons { display: flex; flex-direction: column; gap: 1rem; }
         .suggestion-button {
-            background: var(--background-card);
-            border: 1px solid var(--border-light);
-            padding: 0.75rem 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-            font-weight: 500;
-            color: var(--text-light-gray);
-            cursor: pointer;
-            transition: all 0.3s ease;
+            background: var(--background-card); border: 1px solid var(--border-light);
+            padding: .75rem 1.5rem; border-radius: 10px; text-align: center; font-weight: 500;
+            color: var(--text-light-gray); cursor: pointer; transition: all .3s ease;
         }
+        .suggestion-button:hover { border-color: var(--accent-cyan); color: var(--text-dark); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.07); }
 
-        .suggestion-button:hover {
-            border-color: var(--accent-cyan);
-            color: var(--text-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.07);
-        }
+        /* Sections */
+        .section { padding: 5rem 0; scroll-margin-top: 80px; }
+        #about { background: var(--background-light); }
 
-        /* Section Styles */
-        .section {
-            padding: 5rem 0;
-            scroll-margin-top: 80px;
-        }
-       
-        #about {
-            background: var(--background-light);
-        }
+        /* About grid */
+        .about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: center; }
+        .about-left-column h2 { font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 1.5rem; }
+        .about-subheading { font-size: 1.5rem; font-weight: 600; color: var(--text-dark); line-height: 1.4; margin-bottom: 1rem; }
+        .about-left-column p { font-size: 1.1rem; line-height: 1.7; color: var(--text-light-gray); }
+        .about-right-column { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 
-        /* --- About Section Grid Layout --- */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr; /* Adjust column ratio as needed */
-            gap: 3rem;
-            align-items: center;
-        }
+        .how-we-do-it-card { background: var(--background-card); padding: 1.5rem; border-radius: 15px; border: 1px solid var(--border-light); display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .how-we-do-it-icon { width: 100px; height: 100px; background: var(--background-card); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+        .how-we-do-it-icon img { width: 100%; height: 100%; object-fit: contain; }
+        .how-we-do-it-card h4 { font-family: var(--font-heading); font-size: 1rem; margin-bottom: .5rem; }
 
-        .about-left-column h2 {
-            font-family: var(--font-heading);
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem; /* Increased margin */
-        }
-       
-        .about-subheading {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            line-height: 1.4;
-            margin-bottom: 1rem;
-        }
+        .full-width-banner { padding: 0; line-height: 0; overflow: hidden; }
+        .full-width-banner img { width: 100%; display: block; }
+        .ken-burns { animation: ken-burns 20s ease-in-out infinite alternate; }
+        @keyframes ken-burns { 0%{transform:scale(1) translate(0,0)} 100%{transform:scale(1.1) translate(-2%,2%)} }
 
-        .about-left-column p {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: var(--text-light-gray);
-        }
-
-        .about-right-column {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        .how-we-do-it-card {
-            background: var(--background-card);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 1px solid var(--border-light);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .how-we-do-it-icon {
-            width: 100px;
-            height: 100px;
-            background: var(--background-card);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
-       
-        .how-we-do-it-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .how-we-do-it-card h4 {
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-        }
-       
-        .full-width-banner {
-            padding: 0;
-            line-height: 0;
-            overflow: hidden; /* UPDATED: For Ken Burns effect */
-        }
-        .full-width-banner img {
-            width: 100%;
-            display: block;
-        }
-
-        /* UPDATED: Ken Burns Effect */
-        .ken-burns {
-            animation: ken-burns 20s ease-in-out infinite alternate;
-        }
-       
-        @keyframes ken-burns {
-            0% {
-                transform: scale(1) translate(0, 0);
-            }
-            100% {
-                transform: scale(1.1) translate(-2%, 2%);
-            }
-        }
-
-        #services {
-            background: transparent;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
-       
-        .services-background-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            opacity: 0.1;
-        }
-
-        .section-title {
-            text-align: center;
-            font-family: var(--font-heading);
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            color: var(--text-dark);
-        }
+        #services { background: transparent; position: relative; z-index: 1; overflow: hidden; }
+        .services-background-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: 0.1; }
+        .section-title { text-align: center; font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; margin-bottom: 3rem; color: var(--text-dark); }
 
         /* Services Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .service-card { background: var(--background-card); padding: 2rem; border-radius: 15px; text-align: center; transition: all .3s ease; border: 1px solid var(--border-light); cursor: pointer; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.07); border-color: var(--accent-cyan); }
+        .service-icon { width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+        .service-icon img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+        .service-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-dark); }
+        .service-description { color: var(--text-light-gray); line-height: 1.6; }
 
-        .service-card {
-            background: var(--background-card);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid var(--border-light);
-            cursor: pointer;
-        }
+        /* Make entire service card a link (for the 3 PDF cards) */
+        a.service-card { display: block; text-decoration: none; color: inherit; }
 
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.07);
-            border-color: var(--accent-cyan);
-        }
+        /* Contact */
+        .demo-section { background: linear-gradient(135deg, var(--accent-cyan), #007B9E); color: #fff; }
+        .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; text-align: left; }
+        .demo-section .section-title, .demo-section p { color: #fff; text-align: left; }
+        .demo-section p { max-width: 450px; }
+        .demo-buttons-container { display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+        .demo-button { display: inline-block; padding: 1rem 2rem; background: rgba(255,255,255,0.9); color: var(--accent-cyan); text-decoration: none; border-radius: 50px; font-weight: 600; transition: all .3s ease; border: none; width: 100%; max-width: 350px; text-align: center; }
+        .demo-button:hover { transform: translateY(-2px) scale(1.02); background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
 
-        .service-icon {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-        }
-       
-        .service-icon img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-        }
+        .contact { padding: 5rem 0; background: var(--background-card); }
+        .contact-content { text-align: center; max-width: 600px; margin: 0 auto; }
+        .contact-form { display: grid; gap: 1rem; margin-top: 2rem; }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group input, .form-group textarea { padding: 1rem; border: 1px solid var(--border-light); border-radius: 10px; background: var(--background-light); color: var(--text-dark); transition: all .3s ease; font-family: var(--font-body); }
+        .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-light-gray); }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent-cyan); background: var(--background-card); }
+        .submit-button { padding: 1rem 2rem; background: linear-gradient(135deg, var(--accent-cyan), #007B9E); color: #fff; border: none; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all .3s ease; }
+        .submit-button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,169,224,0.3); }
 
-        .service-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
+        .alt-email { margin-top: 1rem; font-size: .95rem; color: var(--text-light-gray); }
 
-        .service-description {
-            color: var(--text-light-gray);
-            line-height: 1.6;
-        }
-
-        /* NEW: PDF Buttons (Services) */
-        .pdf-buttons-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-            margin: -1rem 0 1rem 0; /* tucks closer to heading */
-        }
-        .pdf-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.25rem;
-            background: var(--background-card);
-            color: var(--text-dark);
-            text-decoration: none;
-            border-radius: 50px;
-            border: 1px solid var(--border-light);
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        .pdf-button:hover {
-            transform: translateY(-2px);
-            border-color: var(--accent-cyan);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-        }
-        .pdf-button img {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        /* Demo Section */
-        .demo-section {
-            background: linear-gradient(135deg, var(--accent-cyan), #007B9E);
-            color: white;
-        }
-
-        .demo-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            text-align: left;
-        }
-
-        .demo-section .section-title, .demo-section p {
-            color: white;
-            text-align: left;
-        }
-       
-        .demo-section p {
-            max-width: 450px;
-        }
-
-        .demo-buttons-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1.5rem;
-        }
-
-        .demo-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--accent-cyan);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            width: 100%;
-            max-width: 350px;
-            text-align: center;
-        }
-
-        .demo-button:hover {
-            transform: translateY(-2px) scale(1.02);
-            background: white;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 5rem 0;
-            background: var(--background-card);
-        }
-
-        .contact-content {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-form {
-            display: grid;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            padding: 1rem;
-            border: 1px solid var(--border-light);
-            border-radius: 10px;
-            background: var(--background-light);
-            color: var(--text-dark);
-            transition: all 0.3s ease;
-            font-family: var(--font-body);
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: var(--text-light-gray);
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-cyan);
-            background: var(--background-card);
-        }
-
-        .submit-button {
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, var(--accent-cyan), #007B9E);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .submit-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 169, 224, 0.3);
-        }
-
-        /* NEW: Alt email line under contact form */
-        .alt-email {
-            margin-top: 1rem;
-            font-size: 0.95rem;
-            color: var(--text-light-gray);
-        }
-       
-        .main-logo-container {
-            padding: 4rem 0;
-            text-align: center;
-            background: var(--background-light);
-        }
-       
-        .main-logo-container img {
-            max-width: 120px;
-            height: auto;
-        }
+        .main-logo-container { padding: 4rem 0; text-align: center; background: var(--background-light); }
+        .main-logo-container img { max-width: 120px; height: auto; }
 
         /* Footer */
-        footer {
-            background: #EAEAEA;
-            color: var(--text-light-gray);
-            text-align: center;
-            padding: 2rem 0;
-        }
-       
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.8);
-            backdrop-filter: blur(5px);
-        }
+        footer { background: #EAEAEA; color: var(--text-light-gray); text-align: center; padding: 2rem 0; }
 
-        .modal-content {
-            position: relative;
-            margin: 5% auto;
-            padding: 0;
-            width: 90%;
-            max-width: 1100px;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-            animation-name: animatetop;
-            animation-duration: 0.4s;
-            background-color: #fefefe;
-        }
-       
-        .modal-body {
-            padding: 0;
-            height: 85vh;
-        }
-       
-        .modal-body .sketchfab-embed-wrapper,
-        .modal-body iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        /* Modal */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+        .modal-content { position: relative; margin: 5% auto; padding: 0; width: 90%; max-width: 1100px; box-shadow: 0 4px 8px rgba(0,0,0,0.2),0 6px 20px rgba(0,0,0,0.19); animation-name: animatetop; animation-duration: .4s; background-color: #fefefe; }
+        .modal-body { padding: 0; height: 85vh; }
+        .modal-body .sketchfab-embed-wrapper, .modal-body iframe { width: 100%; height: 100%; border: none; }
+        @keyframes animatetop { from{top:-300px;opacity:0} to{top:0;opacity:1} }
+        .close { color: #fff; position: absolute; top: 10px; right: 25px; font-size: 35px; font-weight: bold; transition: .3s; z-index: 2001; }
+        .close:hover, .close:focus { color: #bbb; text-decoration: none; cursor: pointer; }
+        .modal-citation { padding: 10px 20px; background-color: #f1f1f1; font-size: 11px; color: #888; text-align: left; line-height: 1.4; }
+        .modal-citation a { color: #555; text-decoration: none; }
+        .modal-citation a:hover { text-decoration: underline; }
 
-        @keyframes animatetop {
-            from {top: -300px; opacity: 0}
-            to {top: 0; opacity: 1}
-        }
-
-        .close {
-            color: white;
-            position: absolute;
-            top: 10px;
-            right: 25px;
-            font-size: 35px;
-            font-weight: bold;
-            transition: 0.3s;
-            z-index: 2001;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
-       
-        .modal-citation {
-            padding: 10px 20px;
-            background-color: #f1f1f1;
-            font-size: 11px;
-            color: #888;
-            text-align: left;
-            line-height: 1.4;
-        }
-        .modal-citation a {
-            color: #555;
-            text-decoration: none;
-        }
-        .modal-citation a:hover {
-            text-decoration: underline;
-        }
-
-
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 992px) {
-            .about-grid, .demo-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .about-left-column {
-                margin-bottom: 3rem;
-            }
-            .demo-section .section-title, .demo-section p {
-                text-align: center;
-            }
-            .demo-buttons-container {
-                align-items: center;
-            }
+            .about-grid, .demo-grid { grid-template-columns: 1fr; text-align: center; }
+            .about-left-column { margin-bottom: 3rem; }
+            .demo-section .section-title, .demo-section p { text-align: center; }
+            .demo-buttons-container { align-items: center; }
         }
-       
         @media (max-width: 768px) {
-            .nav-container {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
-            }
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
+            .nav-container { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+            .nav-links { gap: 1rem; font-size: .9rem; }
+            .hero-title { font-size: 2.5rem; }
+            .services-grid { grid-template-columns: 1fr; }
         }
+        @media (max-width: 576px) { .about-right-column { grid-template-columns: 1fr; } }
 
-        @media (max-width: 576px) {
-            .about-right-column {
-                grid-template-columns: 1fr;
-            }
-        }
+        /* Animations */
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity .6s ease-out, transform .6s ease-out; transition-delay: var(--animation-delay, 0s); }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
 
-        /* UPDATED: Animations */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            transition-delay: var(--animation-delay, 0s);
-        }
-
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* NEW: Data Secure wrapper to keep it standalone under Services */
-        .data-secure-wrapper {
-            max-width: 800px;
-            margin: 2rem auto 0;
-        }
+        /* Data Secure wrapper (kept) */
+        .data-secure-wrapper { max-width: 1000px; margin: 2rem auto 0; }
+        .overline { letter-spacing: .2em; text-transform: uppercase; font-size: .8rem; color: var(--text-light-gray); margin-bottom: .5rem; }
+        .secure-lead { font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; }
+        .secure-panel { background: #E6F3F6; border-radius: 10px; padding: 1rem 1.25rem; text-align: left; display: inline-block; }
+        .secure-panel b { display: block; margin-bottom: .5rem; }
+        .secure-list { margin: .5rem 0 0 1rem; }
+        .secure-list li { margin: .4rem 0; }
     </style>
 </head>
 <body>
@@ -786,22 +275,34 @@
         <div class="container">
             <h2 class="section-title animate-on-scroll">How we guide your digital twin journey</h2>
 
-            <!-- NEW: PDF Buttons ABOVE the current services cards -->
-            <div class="pdf-buttons-container animate-on-scroll" style="--animation-delay: 0.1s;">
-                <a class="pdf-button" href="assets/pdfs/twintech%20-%20Data%20Engineering%20Service-11-aug-2025.pdf" target="_blank" rel="noopener" download>
-                    <img src="assets/images/dataeng.png" alt="Data Engineering PDF">
-                    <span>Data engineering consulting</span>
+            <!-- NEW: Three PDF cards ABOVE the current services cards -->
+            <div class="services-grid animate-on-scroll" style="--animation-delay: 0.1s;">
+                <a class="service-card" href="assets/pdfs/twintech%20-%20Data%20Engineering%20Service-11-aug-2025.pdf" target="_blank" rel="noopener">
+                    <div class="service-icon">
+                        <img src="assets/images/dataeng.png" alt="Data engineering consulting PDF">
+                    </div>
+                    <h3 class="service-title">Data engineering consulting</h3>
+                    <p class="service-description">Consulting for rebuilds and established buildings—unify, clean and model data for twin-readiness.</p>
                 </a>
-                <a class="pdf-button" href="assets/pdfs/twintech%20-%20Digital%20Twins%20for%20Retail%20-11aug2025.pdf" target="_blank" rel="noopener" download>
-                    <img src="assets/images/retailtwin.png" alt="Retail Twins PDF">
-                    <span>Retail twins</span>
+
+                <a class="service-card" href="assets/pdfs/twintech%20-%20Digital%20Twins%20for%20Retail%20-11aug2025.pdf" target="_blank" rel="noopener">
+                    <div class="service-icon">
+                        <img src="assets/images/retailtwin.png" alt="Retail twins PDF">
+                    </div>
+                    <h3 class="service-title">Retail twins</h3>
+                    <p class="service-description">Digital twins for retail to optimise inventory, footfall, staffing and store flows.</p>
                 </a>
-                <a class="pdf-button" href="assets/pdfs/twintech%20Medical%20and%20Infrastructure%20Twins%20-%2011%20aug%202025.pdf" target="_blank" rel="noopener" download>
-                    <img src="assets/images/medtwin.png" alt="Infrastructure & Health Twins PDF">
-                    <span>Infrastructure & health twins (incl. HL7)</span>
+
+                <a class="service-card" href="assets/pdfs/twintech%20Medical%20and%20Infrastructure%20Twins%20-%2011%20aug%202025.pdf" target="_blank" rel="noopener">
+                    <div class="service-icon">
+                        <img src="assets/images/medtwin.png" alt="Infrastructure & Health twins PDF">
+                    </div>
+                    <h3 class="service-title">Infrastructure & health twins (incl. HL7)</h3>
+                    <p class="service-description">Merging building, equipment and hospital information systems—including HL7—into a single operational twin.</p>
                 </a>
             </div>
 
+            <!-- Existing service cards (unchanged) -->
             <div class="services-grid">
                 <div class="service-card animate-on-scroll" style="--animation-delay: 0.2s;">
                     <div class="service-icon">
@@ -826,17 +327,22 @@
                 </div>
             </div>
 
-            <!-- NEW: Standalone "Your data is secure" block under Services -->
+            <!-- UPDATED: Standalone "Your data is secure" block using EXACT copy -->
             <div class="data-secure-wrapper">
                 <div class="service-card animate-on-scroll" style="--animation-delay: 0.5s;">
                     <div class="service-icon">
                         <img src="assets/images/shield.png" alt="Your data is secure">
                     </div>
-                    <h3 class="service-title">Your data is secure</h3>
-                    <p class="service-description">
-                        We apply best-practice controls: encrypted transport, scoped access, and environment isolation. We never sell your data.
-                        Integration with healthcare systems respects standards such as HL7 and applicable privacy laws in your jurisdiction.
-                    </p>
+                    <div class="overline">SECURE BY DESIGN. YOUR DATA STAYS YOURS</div>
+                    <h3 class="service-title secure-lead">Data-backed Intelligence. Built on a foundation of trust &amp; accountability.</h3>
+                    <div class="secure-panel">
+                        <b>At twintech we believe data security and ownership are integral, not optional.</b>
+                        <ul class="secure-list">
+                            <li>Our systems use a smart, secure integration architecture to protect your data.</li>
+                            <li>Built for 100% compliance with existing data and ecommerce frameworks.</li>
+                            <li>You always maintain full ownership of your data as well as any insights, intelligence or IP it creates.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -866,7 +372,7 @@
             <div class="hero-content animate-on-scroll" style="--animation-delay: 0.2s;">
                 <img src="assets/images/heromore2.png" alt="Advanced Digital Twin Application 1" class="hero-banner-image ken-burns">
             </div>
-                  <h2 class="section-title animate-on-scroll" style="margin-top: 4rem;">Simulate. Analyse. Optimise.</h2>
+            <h2 class="section-title animate-on-scroll" style="margin-top: 4rem;">Simulate. Analyse. Optimise.</h2>
             <div class="hero-content animate-on-scroll" style="--animation-delay: 0.4s;">
                 <img src="assets/images/heromore1.png" alt="Advanced Digital Twin Application 2" class="hero-banner-image ken-burns">
             </div>
@@ -893,7 +399,6 @@
                     </div>
                     <button type="submit" class="submit-button">Let's twin!</button>
                 </form>
-                <!-- NEW: Plain email line under the contact form -->
                 <p class="alt-email">You can also email us directly on <a href="mailto:info@twintech.co.za">info@twintech.co.za</a></p>
             </div>
         </div>
@@ -937,7 +442,9 @@
       <div class="modal-content">
         <span class="close" data-modal-id="demoModal1">&times;</span>
         <div class="modal-body">
-          <div class="sketchfab-embed-wrapper"> <iframe title="Charité University Hospital - Operating Room" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/9ec46c4d615a4581a235eebfb162f574/embed"> </iframe> </div>
+          <div class="sketchfab-embed-wrapper">
+            <iframe title="Charité University Hospital - Operating Room" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/9ec46c4d615a4581a235eebfb162f574/embed"></iframe>
+          </div>
         </div>
         <div class="modal-citation">
           <p>Demo model: <a href="https://sketchfab.com/3d-models/charite-university-hospital-operating-room-9ec46c4d615a4581a235eebfb162f574?utm_medium=embed&utm_campaign=share-popup&utm_content=9ec46c4d615a4581a235eebfb162f574" target="_blank" rel="nofollow">"Charité University Hospital - Operating Room"</a> by ChrisRE on Sketchfab. The underlying research for this model is cited as: Queisner M, Pogorzhelskiy M, Remde C, Pratschke J, Sauer IM. VolumetricOR: A New Approach to Simulate Surgical Interventions in Virtual Reality for Training and Education. Surg Innov. 2022 Jun;29(3):406-415. doi: 10.1177/15533506211054240. Epub 2022 Feb 9. PMID: 35137646; PMCID: PMC9438748. <a href="https://pubmed.ncbi.nlm.nih.gov/35137646/" target="_blank" rel="nofollow">View Publication</a>.</p>
@@ -971,7 +478,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // --- Typing Animation for Search Bar ---
+            // Typing animation
             const placeholder = document.getElementById('search-placeholder');
             const questions = [
                 "Predict next month's electricity cost, based on weather forecasts. Include an alaysis of historical data about how weather affetcs our energy consumption in this building.",
@@ -981,111 +488,50 @@
                 "Simulate a power outage on the underground parking level...",
                 "What would be the impact on checkout queue times if we achieve a 20% increase in foot traffic in the shop?"
             ];
-            let questionIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
+            let questionIndex = 0, charIndex = 0, isDeleting = false;
 
             function type() {
                 const currentQuestion = questions[questionIndex];
-                if (isDeleting) {
-                    placeholder.textContent = currentQuestion.substring(0, charIndex--);
-                } else {
-                    placeholder.textContent = currentQuestion.substring(0, charIndex++);
-                }
-
+                if (isDeleting) { placeholder.textContent = currentQuestion.substring(0, charIndex--); }
+                else { placeholder.textContent = currentQuestion.substring(0, charIndex++); }
                 let typeSpeed = isDeleting ? 50 : 150;
-
-                if (!isDeleting && charIndex === currentQuestion.length) {
-                    typeSpeed = 2000; // Pause at the end
-                    isDeleting = true;
-                } else if (isDeleting && charIndex === 0) {
-                    isDeleting = false;
-                    questionIndex = (questionIndex + 1) % questions.length;
-                    typeSpeed = 500; // Pause before typing next
-                }
-
+                if (!isDeleting && charIndex === currentQuestion.length) { typeSpeed = 2000; isDeleting = true; }
+                else if (isDeleting && charIndex === 0) { isDeleting = false; questionIndex = (questionIndex + 1) % questions.length; typeSpeed = 500; }
                 setTimeout(type, typeSpeed);
             }
             type();
 
-
-            // --- Smooth Scrolling ---
+            // Smooth scroll
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
+                    if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
             });
 
-            // --- Navbar Scroll Effect ---
+            // Navbar scroll effect
             const navbar = document.getElementById('navbar');
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
+                if (window.scrollY > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled');
             });
 
-            // --- UPDATED: Section Scroll Animations ---
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
+            // Section animations
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
             }, observerOptions);
+            document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
-            document.querySelectorAll('.animate-on-scroll').forEach(el => {
-                observer.observe(el);
-            });
-           
-            // --- Demo Modal Logic for Multiple Modals ---
+            // Demo modals
             const modals = document.querySelectorAll('.modal');
-           
-            function openModal(modalId) {
-                const modal = document.getElementById(modalId);
-                if(modal) modal.style.display = "block";
-            }
-
-            function closeModal(modalId) {
-                const modal = document.getElementById(modalId);
-                if(modal) modal.style.display = "none";
-            }
-
-            // document.getElementById("launchDemoBtn1").onclick = (e) => { e.preventDefault(); openModal('demoModal1'); };
-            // document.getElementById("launchDemoBtn2").onclick = (e) => { e.preventDefault(); openModal('demoModal2'); };
-            // document.getElementById("launchDemoBtn3").onclick = (e) => { e.preventDefault(); openModal('demoModal3'); };
-            // UPDATED: Added listeners for new demo buttons
+            function openModal(modalId) { const m = document.getElementById(modalId); if (m) m.style.display = "block"; }
+            function closeModal(modalId) { const m = document.getElementById(modalId); if (m) m.style.display = "none"; }
             document.getElementById("launchDemoBtn4").onclick = (e) => { e.preventDefault(); openModal('demoModal4'); };
             document.getElementById("launchDemoBtn5").onclick = (e) => { e.preventDefault(); openModal('demoModal5'); };
-
-            document.querySelectorAll('.close').forEach(closeBtn => {
-                closeBtn.onclick = () => {
-                    closeModal(closeBtn.getAttribute('data-modal-id'));
-                };
-            });
-
-            window.onclick = function(event) {
-                modals.forEach(modal => {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
-                    }
-                });
-            }
-
+            document.querySelectorAll('.close').forEach(btn => { btn.onclick = () => closeModal(btn.getAttribute('data-modal-id')); });
+            window.onclick = function(event) { modals.forEach(m => { if (event.target == m) m.style.display = "none"; }); }
         });
     </script>
 </body>

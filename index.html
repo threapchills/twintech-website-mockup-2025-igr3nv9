@@ -675,17 +675,36 @@
         modals.forEach(m => { if (event.target == m) m.style.display = 'none'; });
       };
 
-      // --- NEW: RESOURCES GALLERY LOGIC ---
+      // --- NEW: RESOURCES GALLERY LOGIC (fixed filenames + eager preload of all slides) ---
       const resourcesImages = [
-        "assets/images/7IRscover.png", // slide 0 - also poster
-        "assets/images/1IR.png",
-        "assets/images/2IR.png",
+        "assets/images/7IRscover.png", // slide 0 - cover
+        "assets/images/1I7.png",
+        "assets/images/2IRT.png",
         "assets/images/3IR.png",
         "assets/images/4IR.png",
         "assets/images/5IR.png",
         "assets/images/6IR.png",
         "assets/images/7IR.png"
       ];
+
+      // Hint browser to fetch early
+      resourcesImages.forEach(src => {
+        const l = document.createElement('link');
+        l.rel = 'preload';
+        l.as = 'image';
+        l.href = src;
+        document.head.appendChild(l);
+      });
+
+      // Eagerly preload every slide so navigation is instant
+      const preloads = resourcesImages.map(src => {
+        const img = new Image();
+        img.decoding = "async";
+        img.referrerPolicy = "no-referrer";
+        img.src = src;
+        return img;
+      });
+
       let resourcesIndex = 0;
       const resourcesModalId = 'resourcesModal';
       const resourcesImgEl = document.getElementById('resourcesGalleryImage');
@@ -693,13 +712,14 @@
 
       function showResourcesSlide(i) {
         resourcesIndex = (i + resourcesImages.length) % resourcesImages.length;
-        resourcesImgEl.src = resourcesImages[resourcesIndex];
+        // Use the preloaded image source to ensure cache hit
+        resourcesImgEl.src = preloads[resourcesIndex].src;
         resourcesCounter.textContent = (resourcesIndex + 1) + " / " + resourcesImages.length;
       }
 
       function openResources() {
         openModal(resourcesModalId);
-        showResourcesSlide(resourcesIndex);
+        showResourcesSlide(0);
       }
 
       const openPoster = document.getElementById('openResourcesGallery');
@@ -707,6 +727,8 @@
 
       document.getElementById('resourcesPrevBtn').addEventListener('click', () => showResourcesSlide(resourcesIndex - 1));
       document.getElementById('resourcesNextBtn').addEventListener('click', () => showResourcesSlide(resourcesIndex + 1));
+      // Click image to advance
+      resourcesImgEl.addEventListener('click', () => showResourcesSlide(resourcesIndex + 1));
 
       // Keyboard navigation while resources modal is open
       document.addEventListener('keydown', (e) => {
@@ -722,4 +744,3 @@
   </script>
 </body>
 </html>
-

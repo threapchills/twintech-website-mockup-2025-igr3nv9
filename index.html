@@ -211,6 +211,38 @@
     .secure-panel b { display: block; margin-bottom: .5rem; }
     .secure-list { margin: .5rem 0 0 1rem; }
     .secure-list li { margin: .4rem 0; }
+
+    /* --- ADDITIONS FOR RESOURCES GALLERY --- */
+    .resources-poster { cursor: pointer; }
+    .gallery-stage { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #000; }
+    .gallery-stage img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .gallery-control {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      border: none;
+      font-size: 28px;
+      padding: 10px 16px;
+      cursor: pointer;
+      border-radius: 8px;
+      z-index: 2002;
+      user-select: none;
+    }
+    .gallery-prev { left: 10px; }
+    .gallery-next { right: 10px; }
+    .gallery-counter {
+      position: absolute;
+      bottom: 8px;
+      right: 14px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      z-index: 2002;
+    }
   </style>
 </head>
 <body>
@@ -225,6 +257,8 @@
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#demo">Demo</a></li>
+          <!-- NEW NAV ITEM -->
+          <li><a href="#resources">Resources</a></li>
           <li><a href="#contact" class="cta-button">Contact</a></li>
         </ul>
       </div>
@@ -400,6 +434,21 @@
     </div>
   </section>
 
+  <!-- NEW RESOURCES SECTION -->
+  <section class="section" id="resources">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">Resources</h2>
+      <div class="hero-content animate-on-scroll" style="--animation-delay: 0.1s;">
+        <img
+          src="assets/images/7IRscover.png"
+          alt="THE 7 INDUSTRIAL REVOLUTIONS slide deck cover"
+          class="hero-banner-image resources-poster"
+          id="openResourcesGallery"
+        />
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="more-solutions">
     <div class="container">
       <h2 class="section-title animate-on-scroll">Twinning is winning!</h2>
@@ -525,6 +574,24 @@
     </div>
   </div>
 
+  <!-- NEW: RESOURCES GALLERY MODAL -->
+  <div id="resourcesModal" class="modal">
+    <div class="modal-content">
+      <span class="close" data-modal-id="resourcesModal">&times;</span>
+      <div class="modal-body">
+        <div class="gallery-stage">
+          <img id="resourcesGalleryImage" src="" alt="The 7 Industrial Revolutions slide"/>
+        </div>
+        <button class="gallery-control gallery-prev" id="resourcesPrevBtn" aria-label="Previous slide">&#10094;</button>
+        <button class="gallery-control gallery-next" id="resourcesNextBtn" aria-label="Next slide">&#10095;</button>
+        <div class="gallery-counter" id="resourcesCounter">1 / 8</div>
+      </div>
+      <div class="modal-citation">
+        <p>Deck: <b>THE 7 INDUSTRIAL REVOLUTIONS</b></p>
+      </div>
+    </div>
+  </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       // Typing animation
@@ -607,6 +674,50 @@
       window.onclick = function (event) {
         modals.forEach(m => { if (event.target == m) m.style.display = 'none'; });
       };
+
+      // --- NEW: RESOURCES GALLERY LOGIC ---
+      const resourcesImages = [
+        "assets/images/7IRscover.png", // slide 0 - also poster
+        "assets/images/1I7.png",
+        "assets/images/2IR.png",
+        "assets/images/3IR.png",
+        "assets/images/4IR.png",
+        "assets/images/5IR.png",
+        "assets/images/6IR.png",
+        "assets/images/7IR.png"
+      ];
+      let resourcesIndex = 0;
+      const resourcesModalId = 'resourcesModal';
+      const resourcesImgEl = document.getElementById('resourcesGalleryImage');
+      const resourcesCounter = document.getElementById('resourcesCounter');
+
+      function showResourcesSlide(i) {
+        resourcesIndex = (i + resourcesImages.length) % resourcesImages.length;
+        resourcesImgEl.src = resourcesImages[resourcesIndex];
+        resourcesCounter.textContent = (resourcesIndex + 1) + " / " + resourcesImages.length;
+      }
+
+      function openResources() {
+        openModal(resourcesModalId);
+        showResourcesSlide(resourcesIndex);
+      }
+
+      const openPoster = document.getElementById('openResourcesGallery');
+      openPoster.addEventListener('click', openResources);
+
+      document.getElementById('resourcesPrevBtn').addEventListener('click', () => showResourcesSlide(resourcesIndex - 1));
+      document.getElementById('resourcesNextBtn').addEventListener('click', () => showResourcesSlide(resourcesIndex + 1));
+
+      // Keyboard navigation while resources modal is open
+      document.addEventListener('keydown', (e) => {
+        const modal = document.getElementById(resourcesModalId);
+        if (modal && modal.style.display === 'block') {
+          if (e.key === 'ArrowLeft') showResourcesSlide(resourcesIndex - 1);
+          if (e.key === 'ArrowRight') showResourcesSlide(resourcesIndex + 1);
+          if (e.key === 'Escape') closeModal(resourcesModalId);
+        }
+      });
+      // --- END RESOURCES GALLERY LOGIC ---
     });
   </script>
 </body>

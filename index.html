@@ -434,11 +434,24 @@
     </div>
   </section>
 
-  <!-- NEW RESOURCES SECTION -->
+  <!-- RESOURCES SECTION -->
   <section class="section" id="resources">
     <div class="container">
       <h2 class="section-title animate-on-scroll">Resources</h2>
-      <div class="hero-content animate-on-scroll" style="--animation-delay: 0.1s;">
+      
+      <!-- NEW: DTIF deck (portrait, first item) -->
+      <div class="hero-content animate-on-scroll" style="--animation-delay: 0.05s;">
+        <img
+          src="assets/images/DTIFslide1.png"
+          alt="Medical Digital Twin Integration Framework"
+          class="hero-banner-image resources-poster"
+          id="openDTIFGallery"
+          style="max-width: 600px; margin-left: auto; margin-right: auto;"
+        />
+      </div>
+      
+      <!-- Existing 7IRs deck -->
+      <div class="hero-content animate-on-scroll" style="--animation-delay: 0.1s; margin-top: 3rem;">
         <img
           src="assets/images/7IRscover.png"
           alt="THE 7 INDUSTRIAL REVOLUTIONS slide deck cover"
@@ -574,7 +587,25 @@
     </div>
   </div>
 
-  <!-- NEW: RESOURCES GALLERY MODAL -->
+  <!-- NEW: DTIF GALLERY MODAL (portrait format) -->
+  <div id="dtifModal" class="modal">
+    <div class="modal-content">
+      <span class="close" data-modal-id="dtifModal">&times;</span>
+      <div class="modal-body">
+        <div class="gallery-stage">
+          <img id="dtifGalleryImage" src="" alt="Medical Digital Twin Integration Framework slide"/>
+        </div>
+        <button class="gallery-control gallery-prev" id="dtifPrevBtn" aria-label="Previous slide">&#10094;</button>
+        <button class="gallery-control gallery-next" id="dtifNextBtn" aria-label="Next slide">&#10095;</button>
+        <div class="gallery-counter" id="dtifCounter">1 / 19</div>
+      </div>
+      <div class="modal-citation">
+        <p>Deck: <b>MEDICAL DIGITAL TWIN INTEGRATION FRAMEWORK</b></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESOURCES GALLERY MODAL (7IRs) -->
   <div id="resourcesModal" class="modal">
     <div class="modal-content">
       <span class="close" data-modal-id="resourcesModal">&times;</span>
@@ -675,7 +706,71 @@
         modals.forEach(m => { if (event.target == m) m.style.display = 'none'; });
       };
 
-      // --- NEW: RESOURCES GALLERY LOGIC (fixed filenames + eager preload of all slides) ---
+      // --- DTIF GALLERY LOGIC (portrait format, 19 slides) ---
+      const dtifImages = [
+        "assets/images/DTIFslide1.png",
+        "assets/images/DTIFslide2.png",
+        "assets/images/DTIFslide3.png",
+        "assets/images/DTIFslide4.png",
+        "assets/images/DTIFslide5.png",
+        "assets/images/DTIFslide6.png",
+        "assets/images/DTIFslide7.png",
+        "assets/images/DTIFslide8.png",
+        "assets/images/DTIFslide9.png",
+        "assets/images/DTIFslide10.png",
+        "assets/images/DTIFslide11.png",
+        "assets/images/DTIFslide12.png",
+        "assets/images/DTIFslide13.png",
+        "assets/images/DTIFslide14.png",
+        "assets/images/DTIFslide15.png",
+        "assets/images/DTIFslide16.png",
+        "assets/images/DTIFslide17.png",
+        "assets/images/DTIFslide18.png",
+        "assets/images/DTIFslide19.png"
+      ];
+
+      // Preload DTIF slides
+      dtifImages.forEach(src => {
+        const l = document.createElement('link');
+        l.rel = 'preload';
+        l.as = 'image';
+        l.href = src;
+        document.head.appendChild(l);
+      });
+
+      const dtifPreloads = dtifImages.map(src => {
+        const img = new Image();
+        img.decoding = "async";
+        img.referrerPolicy = "no-referrer";
+        img.src = src;
+        return img;
+      });
+
+      let dtifIndex = 0;
+      const dtifModalId = 'dtifModal';
+      const dtifImgEl = document.getElementById('dtifGalleryImage');
+      const dtifCounter = document.getElementById('dtifCounter');
+
+      function showDTIFSlide(i) {
+        dtifIndex = (i + dtifImages.length) % dtifImages.length;
+        dtifImgEl.src = dtifPreloads[dtifIndex].src;
+        dtifCounter.textContent = (dtifIndex + 1) + " / " + dtifImages.length;
+      }
+
+      function openDTIF() {
+        openModal(dtifModalId);
+        showDTIFSlide(0);
+      }
+
+      const openDTIFPoster = document.getElementById('openDTIFGallery');
+      openDTIFPoster.addEventListener('click', openDTIF);
+
+      document.getElementById('dtifPrevBtn').addEventListener('click', () => showDTIFSlide(dtifIndex - 1));
+      document.getElementById('dtifNextBtn').addEventListener('click', () => showDTIFSlide(dtifIndex + 1));
+      dtifImgEl.addEventListener('click', () => showDTIFSlide(dtifIndex + 1));
+      // --- END DTIF GALLERY LOGIC ---
+
+      // --- 7IRs RESOURCES GALLERY LOGIC ---
       const resourcesImages = [
         "assets/images/7IRscover.png", // slide 0 - cover
         "assets/images/1IR.png",
@@ -729,19 +824,26 @@
       document.getElementById('resourcesNextBtn').addEventListener('click', () => showResourcesSlide(resourcesIndex + 1));
       // Click image to advance
       resourcesImgEl.addEventListener('click', () => showResourcesSlide(resourcesIndex + 1));
+      // --- END 7IRs RESOURCES GALLERY LOGIC ---
 
-      // Keyboard navigation while resources modal is open
+      // Combined keyboard navigation for both galleries
       document.addEventListener('keydown', (e) => {
-        const modal = document.getElementById(resourcesModalId);
-        if (modal && modal.style.display === 'block') {
+        const resourcesModal = document.getElementById(resourcesModalId);
+        const dtifModal = document.getElementById(dtifModalId);
+        
+        if (resourcesModal && resourcesModal.style.display === 'block') {
           if (e.key === 'ArrowLeft') showResourcesSlide(resourcesIndex - 1);
           if (e.key === 'ArrowRight') showResourcesSlide(resourcesIndex + 1);
           if (e.key === 'Escape') closeModal(resourcesModalId);
         }
+        
+        if (dtifModal && dtifModal.style.display === 'block') {
+          if (e.key === 'ArrowLeft') showDTIFSlide(dtifIndex - 1);
+          if (e.key === 'ArrowRight') showDTIFSlide(dtifIndex + 1);
+          if (e.key === 'Escape') closeModal(dtifModalId);
+        }
       });
-      // --- END RESOURCES GALLERY LOGIC ---
     });
   </script>
 </body>
 </html>
-
